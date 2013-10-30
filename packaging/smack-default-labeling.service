@@ -1,6 +1,5 @@
 [Unit]
 Description=Default SMACK labeling
-ConditionSecurity=smack
 DefaultDependencies=no
 Requires=smack.service local-fs.target
 After=smack.service local-fs.target
