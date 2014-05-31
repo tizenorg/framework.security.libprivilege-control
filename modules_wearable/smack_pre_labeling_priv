@@ -1,0 +1,40 @@
+#!/bin/sh
+
+[ `/bin/grep -c smack /proc/filesystems` -eq 1 ] || exit 0
+
+/bin/mkdir /tmp/alaunch
+/usr/bin/chsmack -a "*" /tmp/alaunch
+
+/usr/bin/chsmack -a "system::share" /dev/shm/
+/usr/bin/chsmack -t /dev/shm/
+
+if [ ! -e /opt/etc/.smack_pre_labeling ]; then
+
+	# fontcache
+	/bin/mkdir -p /opt/var/cache/fontconfig
+	/usr/bin/chsmack -t /opt/var/cache/fontconfig
+	/usr/bin/chsmack -a "system::homedir" /opt/var/cache/fontconfig/*
+	/usr/bin/chsmack -a "system::homedir" /opt/var/cache/fontconfig
+
+	/bin/chown 5000:5000 /home/app
+	/usr/bin/find /home/app -print0 | /usr/bin/xargs -0 /usr/bin/chsmack -a 'system::homedir'
+	/usr/bin/find /home/app -type d -print0 | /usr/bin/xargs -0 /usr/bin/chsmack -t
+
+	/usr/bin/chsmack -a 'system::vconf' /opt/var/kdb/db
+	/usr/bin/chsmack -t /opt/var/kdb/db
+
+	# Set label to database files
+	/usr/bin/chsmack -a "*" /opt/dbspace
+
+	/bin/touch /opt/etc/.smack_pre_labeling
+fi
+
+if [ ! -L /etc/smack ]; then
+	# if /etc/smack is not a symbolic link
+
+        if [ -d /opt/etc/smack/accesses.d ]; then
+		# load EFL-TPK Smack rules
+		/usr/bin/find /opt/etc/smack/accesses.d/ -exec /usr/bin/smackload {} \;
+        fi
+fi
+

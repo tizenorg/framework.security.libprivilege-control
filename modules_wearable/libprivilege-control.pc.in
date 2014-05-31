@@ -1,0 +1,10 @@
+prefix=@PREFIX@
+exec_prefix=@EXEC_PREFIX@
+libdir=@LIB_INSTALL_DIR@
+includedir=@INCLUDE_INSTALL_DIR@
+
+Name: libprivilege-control 
+Description: Library to control privilege of application
+Version: @VERSION@
+Libs: -L${libdir} -lprivilege-control
+Cflags: -I${includedir}/

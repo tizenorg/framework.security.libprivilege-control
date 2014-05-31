@@ -1,0 +1,32 @@
+README for libprivilege-control project
+
+libprivilege-control is a library that is designed to work with Simplified
+Mandatory Access Control Kernel (SMACK/Smack) on Tizen platform.
+
+The library introduces and works with a new abstraction layer for access control
+above the SMACK's rules layer: a privilege layer.
+The privilege is a group of rules combined together to represent SMACK accesses
+(rights) that application needs to have in order to work with some distinctive
+subsystems.
+This library provides an interface allowing maintenance of application
+privileges for Tizen.
+
+The library's API is available in the header file incluce/privilege-control.h.
+The API provides functions that can be used to perform security context actions
+for the whole lifecycle of application: installing, running, uninstalling.
+Such actions are:
+- for installing:
+    ->registering application in a database,
+    ->setting privileges for an application that is being installed,
+    ->setting up rights and giving SMACK labels for application's shared
+    directiories or files,
+    ->adding new privilege definitions,
+- for running:
+    ->setting privileges for an application that is being run,
+- for uninstaling:
+    ->cleaning up data set up during installation.
+
+
+Internally the package implements a database of SMACK rules that are maintained
+via the library API. Each time an API for changing rules is called, the rules
+in database are processed and are loaded to kernel SMACK.

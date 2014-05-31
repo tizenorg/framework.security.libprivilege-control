@@ -1,0 +1,342 @@
+Name:       libprivilege-control
+Summary:    Library to control privilege of application
+Version:    0.0.67.TIZEN
+Release:    1
+Group:      System/Security
+License:    Apache 2.0
+
+Source0:    %{name}-%{version}.tar.gz
+Source1:    %{name}.manifest
+Source2:    %{name}-conf-wearable.manifest
+Source3:    %{name}-conf-mobile.manifest
+Source4:    smack-default-labeling-wearable.service
+Source5:    smack-default-labeling-mobile.service
+Source6:    smack_default_labeling_priv.service
+Source7:    smack_pre_labeling_priv.service
+
+
+%if "%{_repository}" == "wearable"
+
+BuildRequires: cmake
+%if ("%{sec_build_project_name}" == "redwood8974_jpn_dcm") || ("%{sec_build_project_name}" == "redwood8974_eur_open")
+#!BuildIgnore: kernel-headers
+BuildRequires: kernel-headers-3.4-msm8974
+%define seccomp_enabled 1
+%endif
+BuildRequires: libcap-devel
+BuildRequires: pkgconfig(libsmack)
+BuildRequires: pkgconfig(dlog)
+BuildRequires: pkgconfig(libiri)
+BuildRequires: pkgconfig(sqlite3)
+Requires:   smack-privilege-config
+Requires:   sqlite
+
+%description
+development package of library to control privilege of in-house application
+
+%package devel
+Summary:    Control privilege of application (devel)
+Group:      Development/Libraries
+Requires:   %{name} = %{version}-%{release}
+Requires: pkgconfig(libsmack)
+
+%description devel
+Library to control privilege of application (devel)
+
+%package conf
+Summary:    Control privilege of application files
+Group:      Development/Libraries
+Requires:   %{name} = %{version}-%{release}
+Requires:   /usr/bin/chsmack
+
+%description conf
+Library to control privilege of application files
+
+
+%prep
+%setup -q
+
+%build
+
+echo "########################################"
+echo "TIZEN_PROFILE_WEARABLE"
+echo "########################################"
+cp -R modules_wearable/* .
+cp modules_wearable/.*db .
+
+%if 0%{?sec_build_binary_debug_enable}
+export CFLAGS="$CFLAGS -DTIZEN_DEBUG_ENABLE"
+export CXXFLAGS="$CXXFLAGS -DTIZEN_DEBUG_ENABLE"
+export FFLAGS="$FFLAGS -DTIZEN_DEBUG_ENABLE"
+%endif
+
+export CFLAGS="${CFLAGS} -Wno-implicit-function-declaration"
+%cmake . -DCMAKE_BUILD_TYPE=%{?build_type:%build_type}%{!?build_type:RELEASE} \
+         -DCMAKE_VERBOSE_MAKEFILE=ON %{?seccomp_enabled:-DSECCOMP_ENABLED=ON}
+
+VERBOSE=1 make %{?jobs:-j%jobs}
+
+%install
+rm -rf %{buildroot}
+mkdir -p %{buildroot}/usr/share/license
+cp LICENSE %{buildroot}/usr/share/license/%{name}
+cp LICENSE %{buildroot}/usr/share/license/%{name}-conf
+%make_install
+cp -a %{SOURCE1} %{buildroot}%{_datadir}/
+cp -a %{SOURCE2} %{buildroot}%{_datadir}/
+mv %{buildroot}%{_datadir}/libprivilege-control-conf-wearable.manifest  %{buildroot}%{_datadir}/libprivilege-control-conf.manifest
+#install -D -d %{buildroot}/etc/rc.d/rc3.d/
+#install -D -d %{buildroot}/etc/rc.d/rc4.d/
+#ln -sf ../init.d/smack_default_labeling %{buildroot}/etc/rc.d/rc3.d/S44smack_default_labeling
+#ln -sf ../init.d/smack_default_labeling %{buildroot}/etc/rc.d/rc4.d/S44smack_default_labeling
+mkdir -p %{buildroot}/usr/lib/systemd/system/multi-user.target.wants
+ln -sf /usr/lib/systemd/system/smack-rules.service %{buildroot}/usr/lib/systemd/system/multi-user.target.wants/smack-rules.service
+
+mkdir -p %{buildroot}/usr/lib/systemd/system/tizen-runtime.target.wants
+install -m 644 %{SOURCE4} %{buildroot}/usr/lib/systemd/system/
+mv %{buildroot}/usr/lib/systemd/system/smack-default-labeling-wearable.service %{buildroot}/usr/lib/systemd/system/smack-default-labeling.service
+ln -s /usr/lib/systemd/system/smack-default-labeling.service %{buildroot}/usr/lib/systemd/system/multi-user.target.wants/smack-default-labeling.service
+
+mkdir -p %{buildroot}/usr/lib/systemd/system/tizen-runtime.target.wants
+install -m 644 %{SOURCE6} %{buildroot}/usr/lib/systemd/system/
+ln -s /usr/lib/systemd/system/smack_default_labeling_priv.service %{buildroot}/usr/lib/systemd/system/tizen-runtime.target.wants/smack_default_labeling_priv.service
+
+mkdir -p %{buildroot}/usr/lib/systemd/system/basic.target.wants
+install -m 644 %{SOURCE7} %{buildroot}/usr/lib/systemd/system/
+ln -s /usr/lib/systemd/system/smack_pre_labeling_priv.service %{buildroot}/usr/lib/systemd/system/basic.target.wants/smack_pre_labeling_priv.service
+
+
+%post
+if [ ! -e "/home/app" ]
+then
+        mkdir -p /home/app
+fi
+
+if [ ! -e "/home/developer" ]
+then
+        mkdir -p /home/developer
+fi
+
+chown 5000:5000 /home/app
+chmod 755 /home/app
+chown 5100:5100 /home/developer
+chmod 755 /home/developer
+
+if [ ! -e "/smack" ]
+then
+	mkdir /smack
+fi
+touch /smack/load2
+
+if [ ! -e "/opt/etc/smack-app/accesses.d" ]
+then
+	mkdir -p /opt/etc/smack-app/accesses.d
+fi
+
+if [ ! -e "/opt/etc/smack-app-early/accesses.d" ]
+then
+	mkdir -p /opt/etc/smack-app-early/accesses.d
+fi
+
+if [ ! -e "/opt/dbspace" ]
+then
+    mkdir -p /opt/dbspace
+    chown 0:5000 /opt/dbspace
+    chmod 775 /opt/dbspace
+fi
+
+/usr/share/privilege-control/db/updater.sh
+
+api_feature_loader --verbose --dir=/usr/share/privilege-control/
+api_feature_loader --verbose --rules=/usr/share/privilege-control/ADDITIONAL_RULES.smack
+
+%check
+./db/updater.sh --check-files %{buildroot}
+
+%files
+%{_libdir}/*.so.*
+%{_libdir}/librules-db-sql-udf.so
+%{_bindir}/slp-su
+%manifest %{_datadir}/%{name}.manifest
+#%{udev_libdir}/rules.d/*
+#%attr(755,root,root) %{udev_libdir}/uname_env
+%{_datadir}/license/%{name}
+#systemd service
+/usr/lib/systemd/system/smack-rules.service
+/usr/bin/api_feature_loader
+#link to activate systemd service
+/usr/lib/systemd/system/multi-user.target.wants/smack-rules.service
+/usr/share/privilege-control/db/rules-db.sql
+/usr/share/privilege-control/db/rules-db-data.sql
+/usr/share/privilege-control/db/updater.sh
+/usr/share/privilege-control/db/updates/*
+/usr/share/privilege-control/db/load-rules-db.sql
+/etc/opt/upgrade/220.libprivilege-updater.patch.sh
+
+%files conf
+%attr(755,root,root) /etc/rc.d/*
+/usr/lib/systemd/system/smack-default-labeling.service
+/usr/lib/systemd/system/multi-user.target.wants/smack-default-labeling.service
+/usr/lib/systemd/system/smack_pre_labeling_priv.service
+/usr/lib/systemd/system/basic.target.wants/smack_pre_labeling_priv.service
+/usr/lib/systemd/system/smack_default_labeling_priv.service
+/usr/lib/systemd/system/tizen-runtime.target.wants/smack_default_labeling_priv.service
+%manifest %{_datadir}/%{name}-conf.manifest
+%{_datadir}/license/%{name}-conf
+/opt/dbspace/.privilege_control*.db
+
+%files devel
+%{_includedir}/*.h
+%{_libdir}/libprivilege-control.so
+%{_libdir}/pkgconfig/*.pc
+
+%else
+
+BuildRequires: cmake
+BuildRequires: libcap-devel
+BuildRequires: pkgconfig(libsmack)
+BuildRequires: pkgconfig(dlog)
+BuildRequires: pkgconfig(libiri)
+BuildRequires: pkgconfig(sqlite3)
+Requires:   smack-privilege-config
+Requires:   sqlite
+
+%description
+development package of library to control privilege of in-house application
+
+%package devel
+Summary:    Control privilege of application (devel)
+Group:      Development/Libraries
+Requires:   %{name} = %{version}-%{release}
+Requires:   pkgconfig(libsmack)
+
+%description devel
+Library to control privilege of application (devel)
+
+%package conf
+Summary:    Control privilege of application files
+Group:      Development/Libraries
+Requires:   %{name} = %{version}-%{release}
+Requires:   /usr/bin/chsmack
+
+%description conf
+Library to control privilege of application files
+
+
+%prep
+%setup -q
+
+%build
+
+echo "########################################"
+echo "TIZEN_PROFILE_MOBILE"
+echo "########################################"
+cp -R modules_mobile/* .
+cp modules_mobile/.*db .
+
+export CFLAGS="${CFLAGS} -Wno-implicit-function-declaration"
+%cmake . -DCMAKE_BUILD_TYPE=%{?build_type:%build_type}%{!?build_type:RELEASE} \
+         -DCMAKE_VERBOSE_MAKEFILE=ON
+
+VERBOSE=1 make %{?jobs:-j%jobs}
+
+%install
+rm -rf %{buildroot}
+mkdir -p %{buildroot}/usr/share/license
+cp LICENSE %{buildroot}/usr/share/license/%{name}
+cp LICENSE %{buildroot}/usr/share/license/%{name}-conf
+cp LICENSE %{buildroot}/usr/share/license/%{name}-devel
+%make_install
+
+mkdir -p %{buildroot}/etc
+mv %{buildroot}/opt/etc/passwd %{buildroot}/etc/passwd
+mv %{buildroot}/opt/etc/group %{buildroot}/etc/group
+
+cp -a %{SOURCE3} %{buildroot}%{_datadir}/
+mv %{buildroot}%{_datadir}/libprivilege-control-conf-mobile.manifest  %{buildroot}%{_datadir}/libprivilege-control-conf.manifest
+cp -a %{SOURCE5} %{buildroot}%{_datadir}/
+mv %{buildroot}%{_datadir}/smack-default-labeling-mobile.service %{buildroot}%{_datadir}/smack-default-labeling.service
+
+mkdir -p %{buildroot}/usr/lib/systemd/system/basic.target.wants
+install -m 644 %{SOURCE5} %{buildroot}/usr/lib/systemd/system/
+mv %{buildroot}/usr/lib/systemd/system/smack-default-labeling-mobile.service %{buildroot}/usr/lib/systemd/system/smack-default-labeling.service
+ln -s ../smack-default-labeling.service %{buildroot}/usr/lib/systemd/system/basic.target.wants/
+
+mkdir -p %{buildroot}/usr/lib/systemd/system/multi-user.target.wants
+ln -sf /usr/lib/systemd/system/smack-rules.service %{buildroot}/usr/lib/systemd/system/multi-user.target.wants/smack-rules.service
+
+mkdir -p %{buildroot}/usr/lib/systemd/system/tizen-runtime.target.wants
+ln -s /usr/lib/systemd/system/smack-default-labeling.service %{buildroot}/usr/lib/systemd/system/multi-user.target.wants/smack-default-labeling.service
+
+%post
+if [ ! -e "/home/app" ]
+then
+        mkdir -p /home/app
+fi
+
+if [ ! -e "/home/developer" ]
+then
+        mkdir -p /home/developer
+fi
+
+chown 5000:5000 /home/app
+chmod 755 /home/app
+chown 5100:5100 /home/developer
+chmod 755 /home/developer
+
+
+if [ ! -e "/opt/etc/smack-app/accesses.d" ]
+then
+	mkdir -p /opt/etc/smack-app/accesses.d
+fi
+
+if [ ! -e "/opt/etc/smack-app-early/accesses.d" ]
+then
+	mkdir -p /opt/etc/smack-app-early/accesses.d
+fi
+
+sqlite3 /opt/dbspace/.rules-db.db3 < /opt/dbspace/rules-db.sql
+rm -f /opt/dbspace/rules-db.sql
+
+sqlite3 /opt/dbspace/.rules-db.db3 < /opt/dbspace/rules-db-data.sql
+rm -f /opt/dbspace/rules-db-data.sql
+
+api_feature_loader --verbose --dir=/usr/share/privilege-control/
+api_feature_loader --verbose --rules=/usr/share/privilege-control/ADDITIONAL_RULES.smack
+
+%files
+%{_libdir}/*.so.*
+%{_libdir}/librules-db-sql-udf.so
+%{_bindir}/slp-su
+#%{udev_libdir}/rules.d/*
+#%attr(755,root,root) %{udev_libdir}/uname_env
+/usr/share/license/%{name}
+#systemd service
+/usr/lib/systemd/system/smack-rules.service
+/usr/bin/api_feature_loader
+#link to activate systemd service
+/usr/lib/systemd/system/multi-user.target.wants/smack-rules.service
+/opt/dbspace/rules-db.sql
+/opt/dbspace/rules-db-data.sql
+/opt/etc/smack/load-rules-db.sql
+
+%files conf
+/etc/group
+/etc/passwd
+%attr(755,root,root) /etc/rc.d/*
+/usr/share/smack-default-labeling.service
+/usr/lib/systemd/system/smack-default-labeling.service
+/usr/lib/systemd/system/basic.target.wants/smack-default-labeling.service
+/usr/lib/systemd/system/multi-user.target.wants/smack-default-labeling.service
+%manifest %{_datadir}/%{name}-conf.manifest
+/opt/dbspace/.privilege_control*.db
+/usr/share/license/%{name}-conf
+
+%files devel
+%{_includedir}/*.h
+%{_libdir}/libprivilege-control.so
+%{_libdir}/pkgconfig/*.pc
+/usr/share/license/%{name}-devel
+
+
+%endif

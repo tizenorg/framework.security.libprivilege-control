@@ -1,0 +1,7 @@
+/usr/lib/libprivilege-control.so
+/usr/lib/libprivilege-control.so.*
+/usr/bin/slp-su
+/usr/share/privilege-control/*
+/opt/etc/passwd
+/opt/etc/group
+/usr/lib/udev/rules.d

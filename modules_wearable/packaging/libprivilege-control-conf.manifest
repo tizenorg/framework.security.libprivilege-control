@@ -1,0 +1,41 @@
+<manifest>
+	<define>
+		<domain name="system"/>
+		<provide>
+			<label name="system::vconf"/>
+			<label name="system::vconf_setting"/>
+			<label name="system::vconf_privacy"/>
+			<label name="system::vconf_inhouse"/>
+			<label name="system::vconf_system"/>
+			<label name="system::vconf_multimedia"/>
+			<label name="system::vconf_network"/>
+			<label name="system::vconf_misc"/>
+			<label name="system::camera"/>
+			<label name="system::app_logging"/>
+			<label name="system::sys_logging"/>
+			<label name="system::audio"/>
+			<label name="system::recording"/>
+			<label name="system::hwcodec"/>
+			<label name="system::video"/>
+			<label name="system::system_bklight"/>
+			<label name="system::system_torch"/>
+			<label name="system::video_tel"/>
+			<label name="system::radio"/>
+			<label name="system::use_internet"/>
+			<label name="system::homedir"/>
+			<label name="system::syslogd"/>
+			<label name="system::media"/>
+			<label name="system::ext_storage"/>
+			<label name="system::privilege_control::db"/>
+			<label name="system::clipboard"/>
+		</provide>
+	</define>
+	<request>
+		<domain name="_"/>
+	</request>
+	<assign>
+		<filesystem path="/opt/dbspace/.privilege_control_app_gids.db" label="system::privilege_control::db"/>
+		<filesystem path="/opt/dbspace/.rules-db.db3" label="system::privilege_control::db"/>
+        <filesystem path="/etc/rc.d/init.d/smack_default_labeling" exec_label="none"/>
+	</assign>
+</manifest>

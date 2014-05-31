@@ -1,0 +1,3 @@
+#!/bin/sh
+
+/usr/bin/smackload /opt/etc/smack/smack_default_rules2
