@@ -1,0 +1,138 @@
+CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
+PROJECT(libprivilege-control C)
+
+SET(TARGET_PRIVILEGE_CONTROL "privilege-control")
+SET(PREFIX ${CMAKE_INSTALL_PREFIX})
+SET(EXEC_PREFIX "\${prefix}")
+SET(SHAREDIR "${PREFIX}/share/privilege-control")
+SET(HOMEDIR "/opt/home")
+SET(VERSION 1.0)
+
+SET(VERSION_MAJOR 0)
+SET(VERSION "${VERSION_MAJOR}.0.2")
+
+INCLUDE_DIRECTORIES(${CMAKE_SOURCE_DIR}/include)
+
+INCLUDE(FindPkgConfig)
+pkg_check_modules(pkgs REQUIRED libsmack libiri dlog sqlite3)
+
+FOREACH(flag ${pkgs_CFLAGS})
+	SET(EXTRA_CFLAGS "${EXTRA_CFLAGS} ${flag}")
+ENDFOREACH(flag)
+
+# TIZEN_ENGINEER_MODE is used in  dlog.h file.
+# Without this flag all logs defined with SLOGD macro
+# will be expanded to empty instruction.
+
+SET(CMAKE_C_FLAGS_CCOV    "--coverage")
+SET(CMAKE_C_FLAGS_DEBUG   "-O0 -g -ggdb -DDLOG_DEBUG_ENABLED -DTIZEN_DEBUG_ENABLE")
+SET(CMAKE_C_FLAGS_RELEASE "-O2 -g")
+
+SET(src_dir "./src")
+SET(include_dir "./include")
+SET(TIZEN_VERSION  \"2.3\")
+
+## Additional flag
+ADD_DEFINITIONS("-fvisibility=hidden")
+ADD_DEFINITIONS("-DSHAREDIR=${SHAREDIR}")
+ADD_DEFINITIONS("-DHOMEDIR=${HOMEDIR}")
+ADD_DEFINITIONS("-Wall -Wextra")
+
+ADD_DEFINITIONS("-DDLOG_WARN_ENABLED")
+ADD_DEFINITIONS("-DDLOG_ERROR_ENABLED")
+
+ADD_DEFINITIONS("-DTIZEN_VERSION=${TIZEN_VERSION}")
+
+IF("${PROFILE_TYPE}" STREQUAL "WEARABLE")
+    ADD_DEFINITIONS("-DPROFILE_TYPE_WEARABLE")
+ELSEIF("${PROFILE_TYPE}" STREQUAL "MOBILE")
+    ADD_DEFINITIONS("-DPROFILE_TYPE_MOBILE")
+ENDIF()
+
+IF (SECCOMP_ENABLED MATCHES "ON")
+    ADD_DEFINITIONS("-DSECCOMP_ENABLED")
+ENDIF (SECCOMP_ENABLED MATCHES "ON")
+
+###################################################################################################
+## for libprivilege-control.so (library)
+INCLUDE_DIRECTORIES(${pkgs_INCLUDE_DIRS})
+SET(libprivilege-control_SOURCES
+	${src_dir}/privilege-control.c
+	${src_dir}/common.c
+	${src_dir}/rules-db.c
+	${src_dir}/rules-db-internals.c
+	)
+SET(libprivilege-control_CFLAGS  " ${CFLAGS} -fPIC -I${include_dir}")
+SET(libprivilege-control_LIBADD  "${pkgs_LDFLAGS} -lcap -lcrypt")
+
+ADD_LIBRARY(${TARGET_PRIVILEGE_CONTROL} SHARED ${libprivilege-control_SOURCES})
+TARGET_LINK_LIBRARIES(${TARGET_PRIVILEGE_CONTROL} ${libprivilege-control_LIBADD} ${pkgs_LIBRARIES})
+SET_TARGET_PROPERTIES(${TARGET_PRIVILEGE_CONTROL} PROPERTIES COMPILE_FLAGS "${libprivilege-control_CFLAGS}")
+SET_TARGET_PROPERTIES(${TARGET_PRIVILEGE_CONTROL} PROPERTIES SOVERSION ${VERSION_MAJOR})
+SET_TARGET_PROPERTIES(${TARGET_PRIVILEGE_CONTROL} PROPERTIES VERSION ${VERSION})
+
+###################################################################################################
+## SQL scripts preprocessing to contain current Tizen OS version
+FILE(GLOB_RECURSE SQL_SCRIPTS "db/*.sql.in")
+FOREACH(SQL_SCRIPT ${SQL_SCRIPTS})
+	GET_FILENAME_COMPONENT(SQL_SCRIPT_PATH "${SQL_SCRIPT}" PATH)
+	GET_FILENAME_COMPONENT(SQL_SCRIPT_WE   "${SQL_SCRIPT}" NAME_WE)
+	CONFIGURE_FILE("${SQL_SCRIPT}" "${SQL_SCRIPT_PATH}/${SQL_SCRIPT_WE}.sql" @ONLY)
+ENDFOREACH(SQL_SCRIPT)
+
+###################################################################################################
+## for rules-db-sql-udf.so (library)
+SET(rules-db-sql-udf_SOURCES ./db/rules-db-sql-udf.c)
+SET(rules-db-sql-udf_CFLAGS  " ${CFLAGS} -fPIC")
+
+ADD_LIBRARY(rules-db-sql-udf MODULE ${rules-db-sql-udf_SOURCES})
+SET_TARGET_PROPERTIES(rules-db-sql-udf PROPERTIES COMPILE_FLAGS "${rules-db-sql-udf_CFLAGS}")
+SET_TARGET_PROPERTIES(rules-db-sql-udf PROPERTIES LINK_FLAGS "${rules-db-sql-udf_LDFLAGS}")
+
+###################################################################################################
+## for slp-su (excutable)
+SET(slp-su_SOURCES ${src_dir}/slp-su.c)
+SET(slp-su_CFLAGS  " ${CFLAGS} -fPIC -I${include_dir}")
+
+ADD_EXECUTABLE(slp-su ${slp-su_SOURCES})
+TARGET_LINK_LIBRARIES(slp-su ${pkgs_LDFLAGS} ${pkgs_LIBRARIES} ${TARGET_PRIVILEGE_CONTROL})
+SET_TARGET_PROPERTIES(slp-su PROPERTIES COMPILE_FLAGS "${slp-su_CFLAGS}")
+###################################################################################################
+
+
+CONFIGURE_FILE(libprivilege-control.pc.in libprivilege-control.pc @ONLY)
+
+INSTALL(TARGETS ${TARGET_PRIVILEGE_CONTROL} DESTINATION  ${LIB_INSTALL_DIR} COMPONENT RuntimeLibraries)
+INSTALL(TARGETS rules-db-sql-udf DESTINATION  ${LIB_INSTALL_DIR} COMPONENT RuntimeLibraries)
+INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/libprivilege-control.pc DESTINATION  ${LIB_INSTALL_DIR}/pkgconfig)
+INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/smack_default_labeling DESTINATION /etc/rc.d/init.d/)
+INSTALL(FILES ${CMAKE_CURRENT_SOURCE_DIR}/include/privilege-control.h DESTINATION ${INCLUDE_INSTALL_DIR})
+#INSTALL(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/udev/ DESTINATION lib/udev)
+INSTALL(PROGRAMS ${CMAKE_CURRENT_SOURCE_DIR}/slp-su DESTINATION bin)
+
+INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/db/rules-db.sql DESTINATION /usr/share/privilege-control/db)
+INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/db/rules-db-data.sql DESTINATION /usr/share/privilege-control/db)
+INSTALL(DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/db/updates/ DESTINATION /usr/share/privilege-control/db/updates PATTERN "*.sql.in" EXCLUDE)
+INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/db/updater.sh DESTINATION /usr/share/privilege-control/db
+     PERMISSIONS OWNER_READ
+                 OWNER_WRITE
+                 OWNER_EXECUTE
+                 GROUP_READ
+                 GROUP_WRITE
+                 GROUP_EXECUTE
+                 WORLD_READ
+                 WORLD_WRITE
+                 WORLD_EXECUTE)
+INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/db/load-rules-db.sql DESTINATION /usr/share/privilege-control/db)
+INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/db/220.libprivilege-updater.patch.sh DESTINATION /etc/opt/upgrade
+     PERMISSIONS OWNER_READ
+                 OWNER_WRITE
+                 OWNER_EXECUTE)
+
+
+INSTALL(FILES ${PROJECT_SOURCE_DIR}/smack-rules.service
+	DESTINATION /usr/lib/systemd/system
+        PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE)
+
+ADD_SUBDIRECTORY(api_feature_loader)
+ADD_SUBDIRECTORY(smack_rules_buffer)

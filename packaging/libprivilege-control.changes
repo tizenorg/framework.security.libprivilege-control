@@ -1,10 +1,228 @@
-* Wed Dec 18 2013 Tomasz Swierczek - 0.0.66.SLP
+* Wed Nov 12 2014 Bumjin Im - 0.0.89
+[Bumjin Im]
+- Fix for SQLite3 PERSIST bug
+
+* Wed Nov 12 2014 Bumjin Im - 0.0.88
+[Bumjin Im
+ - Prevent fixes for Kiran
+* Fri Nov 7 2014 Tomasz Swierczek - 0.0.87
+[Tomasz Swierczek]
+- Fixed FOTA update script & removed TRUNCATE sqlite3 option as its implementation causes DB corruption
+
+* Fri Nov 7 2014 Zofia Abramowska - 0.0.86
+[Tomasz Swierczek]
+- [WORKAROUND] For api_feature_loader poor performance during image creation and FOTA upgrade
+[Marcin Lis]
+- Prevent fix: avoid always-true comparison in smack_rules_buffer
+
+* Thu Nov 6 2014 Krzysztof Jackiewicz - 0.0.85
+[Tomasz Swierczek]
+- Added better manual (-h option output) to api_feature_loader.
+[Marcin Lis]
+- Fix bugs reported by prevent in smack_rules_buffer
+[Marcin Lis]
+- Truncate journal file in update to v6 script
+[Marcin Lis]
+- Small fixes in comments in common header
+[Krzysztof Sasiak]
+- Fix for memory leak in perm_define_permission_for_tizen_version
+[Michal Eljasiewicz]
+- Fix null pointer dereference in get_current_container_id
+
+* Tue Nov 4 2014 Zofia Abramowska - 0.0.84
+[Jan Olszak]
+- Truncate journal file instead of deleting it.
+[Jan Cybulski]
+- Allow to use symlinks in permission loading
+[Krzysztof Sasiak]
+- Hybrid app support
+[Krzysztof Jackiewicz]
+- Change blacklist clearing statements
+[Michal Eljasiewicz]
+- Fix for memory leak in rdb_enable_app_permissions
+[Sebastian Grabowski]
+- Fix for memory leak in set_dac function
+[jooseong.lee]
+- Revert "Smack default labeling for /opt/usr/media directory"
+
+* Fri Oct 24 2014 Krzysztof Jackiewicz - 0.0.83
+[Krzysztof Jackiewicz]
+- Implement functions for blacklist permission control
+[Krzysztof Jackiewicz]
+- Implement function for freeing blacklist statuses
+[Krzysztof Jackiewicz]
+- Implement blacklist status query
+[Krzysztof Jackiewicz]
+- Add blacklist file parsing
+[Krzysztof Jackiewicz]
+- Add blacklist to database schema
+[Krzysztof Jackiewicz]
+- Add argument check to blacklist API
+[Krzysztof Jackiewicz]
+- Black list API stub
+[Krzysztof Jackiewicz]
+- Revert "Add support for disabling permissions based on filters"
+[jooseong.lee]
+- Smack default labeling for /opt/usr/media directory
+
+* Wed Oct 22 2014 Bartlomiej Grzelewski - 0.0.82
+[Marcin Lis]
+- Optimize the smack-rules.service
+[Marcin Lis]
+- Add build configuration for smack_rules_buffer
+[Rafal Krypa]
+- Add the smack_rules_buffer dir and source file
+[Krzysztof Sasiak]
+- Disable setting of unsupported version inside perm_app_set_privilege_version
+[Krzysztof Sasiak]
+- Remove tizen version string validation.
+[Krzysztof Sasiak]
+- More elaborate logging inside perm_app_enable_permissions
+
+* Fri Oct 10 2014 Zofia Abramowska - 0.0.81
+[Krzysztof Sasiak]
+- Support for running of wrt apps using wrt-client and WebProcess
+[Krzysztof Sasiak]
+- Fix for all versions of permission being added upon assigning permissions to an application
+[Krzysztof Sasiak]
+- Fix: Loosen up the version naming policy
+[Marcin Lis]
+- Fix segfault when enabling permissions for not-installed app
+
+* Mon Aug 25 2014 Zofia Abramowska - 0.0.80
+[Michal Witanowski]
+- Fix path labeling
+[Krzysztof Sasiak]
+- Fix: Add additional info to API description
+[Marcin Lis]
+- Delete OLD permission rules correctly
+
+* Wed Aug 6 2014 Zofia Abramowska - 0.0.79
+[Michal Witanowski]
+- LXC-aware labeling
+
+* Fri Aug 1 2014 Zofia Abramowska - 0.0.78
+[Krzysztof Jackiewicz]
+- Conditional dependency on kernel-headers-3.4-msm8974 removed
+
+* Fri Aug 1 2014 Krzysztof Jackiewicz - 0.0.77
+[Krzysztof Sasiak]
+- Add support for disabling permissions based on filters
+
+* Fri Jul 18 2014 Zofia Abramowska - 0.0.75
+[Krzysztof Sasiak]
+- Add support for comments inside *.smack files
+[Marcin Lis]
+- Add smack rules updating when clearing permissions.
+[Jan Cybulski]
+- Fix: delete all tables separately on database refresh
+
+* Fri Jul 04 2014 Rafal Krypa - 0.0.74
+- Update privilege support to handle multiple Tizen versions
+
+* Tue Jun 24 2014 Krzysztof Jackiewicz - 0.0.73
+[jooseong.lee]
+- Check smack_enable on perm_app_set_privilege API [team] arch [request] N/A
+
+* Wed Jun 18 2014 Krzysztof Jackiewicz - 0.0.72
+[Marcin Lis]
+- Fix rules updating after permissions reloading.
+
+* Thu Jun 12 2014 Rafal Krypa - 0.0.71
+- Turn seccomp on
+- change the kernel header to kernel-headers-tizen-dev for tizenlite
+- remove werror option
+- Add two new application subtypes for EFL
+
+* Tue Mar 25 2014 Bartlomiej Grzelewski - 0.0.70
+[Marcin Lis]
+- Remove DAC files, their usage and old database files. Add new API.
+[Zofia Abramowska]
+- Enable debug version of perm_app_set_privilege
+[Zofia Abramowska]
+- Fix seccomp for pwlock and phone
+[Kidong Kim]
+- Remove sec_build_project_name add "w" rule to npruntime plugin label update comment in API header file
+[Kidong Kim]
+- remove sec_build_project_name
+[Marcin Lis]
+- Add "w" rule to npruntime plugin label.
+[Kidong Kim]
+- fix typing error on script
+[Lukasz Wojciechowski]
+- Update comment in API header file.
+[Kidong Kim]
+- Fix package type
+[Kidong Kim]
+- fix package type
+
+* Tue Feb 11 2014 Krzysztof Jackiewicz - 0.0.69
+[Lukasz Wojciechowski]
+- Recognize all types of application (+OSP, +EFL)
+[Adam Malinowski]
+- Clean scriplet 'post' section.
+[Pawel Broda]
+- New API for getting information about application privileges state
+
+* Wed Jan 29 2014 Krzysztof Jackiewicz - 0.0.68
+[Krzysztof Jackiewicz]
+- Assign @ label to 192.168.129.3
+[Pawel Broda]
+- API for transaction rollback in libprivilege
+[Jan Olszak]
+- Correction in sqlite3_finalize error handling.
+[Damian Chromejko]
+- Implement perm_app_remove_path() for libprivilege-control API.
+[Piotr Bartosiewicz]
+- Code cleanup
+
+* Tue Jan 21 2014 Bartlomiej Grzelewski - 0.0.67
+[Bartlomiej Grzelewski]
+- Comment out unused code.
+[Bartlomiej Grzelewski]
+- Revert "Revert "disable seccomp temporary""
+[Jan Olszak]
+- Removed unused linker flags.
+[Pawel Broda]
+- Add some file names to api_feature_loader output
+[Pawel Broda]
+- Extend api_feature_loader options.
+[Damian Chromejko]
+- Add support for shared transaction in libprivilege-control DB.
+[Lukasz Wojciechowski]
+- Rule tokenizer fix
+[Damian Chromejko]
+- Implement perm_app_get_permissions() API in libprivilege-control.
+[Damian Chromejko]
+- Implement perm_app_get_paths() API in libprivilege-control.
+[Sebastian Grabowski]
+- New API for registering app permissions.
+[Krzysztof Jackiewicz]
+- Revert "disable seccomp temporary"
+[Krzysztof Jackiewicz]
+- Runtime seccomp check added
+[Kidong Kim]
+- Disble seccomp temporary
+[Kidong Kim]
+- disable seccomp temporary
+[Kidong Kim]
+- add seccomp in order to restrict unauthorized system call
+[Kidong Kim]
+- add seccom
+[Kidong Kim]
+- add seccomp
+[Tomasz Swierczek]
+- Always build against kernel-headers-3.4-msm8974
+[Krzysztof Jackiewicz]
+- Blocking ptrace with seccomp on Docomo
+
+* Wed Dec 18 2013 Tomasz Swierczek - 0.0.66
 [Tomasz Swierczek]
 - New API dedicated for debug_launchpad
 [Jan Olszak]
 - Corrected marking additional rules as modified.
 
-* Tue Dec 17 2013 Bartlomiej Grzelewski - 0.0.65.SLP
+* Tue Dec 17 2013 Bartlomiej Grzelewski - 0.0.65
 [Kidong Kim]
 - remove unnecessary execute label of script
 [Zbigniew Jasinski]
@@ -18,7 +236,7 @@
 [Jan Olszak]
 - Removed a spell mistake form defines.
 
-* Mon Dec 9 2013 Jan Olszak - 0.0.64.SLP
+* Mon Dec 9 2013 Jan Olszak - 0.0.64
 [Jan Olszak]
 - Full deletion of previous definition of permission.
 [Damian Chromejko]
@@ -36,11 +254,11 @@
 [Piotr Bartosiewicz]
 - Optimize perm_begin and perm_end
 
-* Fri Nov 29 2013 Krzysztof Jackiewicz - 0.0.63.SLP
+* Fri Nov 29 2013 Krzysztof Jackiewicz - 0.0.63
 [Zbigniew Jasinski]
 - Change debug flag from TIZEN_ENGINEER_MODE to TIZEN_DEBUG_ENABLE
 
-* Thu Nov 28 2013 Krzysztof Jackiewicz - 0.0.62.SLP
+* Thu Nov 28 2013 Krzysztof Jackiewicz - 0.0.62
 [Radoslaw Bartosiak]
 - Elimination of relative command paths ambiguity
 [Radoslaw Bartosiak]
@@ -56,7 +274,7 @@
 [Jan Olszak]
 - Removed a memory leak.
 
-* Tue Nov 12 2013 Krzysztof Jackiewicz - 0.0.61.SLP
+* Tue Nov 12 2013 Krzysztof Jackiewicz - 0.0.61
 [Krzysztof Jackiewicz]
 - Duplicated path error ignored
 [Marcin Lis]
@@ -70,17 +288,17 @@
 [Jan Olszak]
 - Modified perm_end and rdb_end so they return error code.
 
-* Tue Oct 29 2013 Krzysztof Jackiewicz - 0.0.60.SLP
+* Tue Oct 29 2013 Krzysztof Jackiewicz - 0.0.60
 [Krzysztof Jackiewicz]
 - Prevent fix - NULL check after dereference.
 
-* Fri Oct 25 2013 Krzysztof Jackiewicz - 0.0.59.SLP
+* Fri Oct 25 2013 Krzysztof Jackiewicz - 0.0.59
 [Marcin Lis]
 - Implement new wildcard ~NPRUNTIME_PATH~ +fix workaround
 [Marcin Lis]
 - Implement adding new WRT rules in libprivilege-control
 
-* Tue Oct 15 2013 Krzysztof Jackiewicz - 0.0.58.SLP
+* Tue Oct 15 2013 Krzysztof Jackiewicz - 0.0.58
 [Jan Olszak]
 - Correction in enabling permissions.
 - Renamed enums and deleted unused defines
@@ -98,11 +316,11 @@
 - Loading api-features from a file.
 - Revert "rollback because of rule database"
 
-* Mon Sep 16 2013 Bartlomiej Grzelewski - 0.0.57.SLP
+* Mon Sep 16 2013 Bartlomiej Grzelewski - 0.0.57
 [Jan Olszak]
 - Optimalization of the database operation time.
 
-* Fri Sep 13 2013 Krzysztof Jackiewicz - 0.0.56.SLP
+* Fri Sep 13 2013 Krzysztof Jackiewicz - 0.0.56
 [Jan Olszak]
 - Corrected behavior when there is no Smack on the target.
 [Jan Olszak]
@@ -122,16 +340,16 @@
 [Bartlomiej Grzelewski]
 - Takes compilation profile from command line.
 
-* Wed Aug 28 2013 Krzysztof Jackiewicz - 0.0.55.SLP
+* Wed Aug 28 2013 Krzysztof Jackiewicz - 0.0.55
 [Janusz Kozerski]
 - Add for all anti viruses RWX access to all public-RO and group-RW shared folder
 [Marcin Lis]
 - Simple corrections in api-feature handling.
 
-* Tue Aug 13 2013 Rafal Krypa - 0.0.54.SLP
+* Tue Aug 13 2013 Rafal Krypa - 0.0.54
 - Adapt code for new libsmack API
 
-* Thu Aug  1 2013 Bartlomiej Grzelewski - 0.0.53.SLP
+* Thu Aug  1 2013 Bartlomiej Grzelewski - 0.0.53
 - Fix libprivilege-control not checking input parameters
 - Add better debug logs to libprivilege-control
 - Fixing language errors
@@ -141,30 +359,30 @@
 - Create format strings for scanf statically.
 - Add support for new access mode for setting locks ("l")
 
-* Mon Jul 22 2013 Bartlomiej Grzelewski - 0.0.52.SLP
+* Mon Jul 22 2013 Bartlomiej Grzelewski - 0.0.52
 - Loading all smack-app rules during boot
 - Add generic solution for adding rules to shared dirs (RO & RW)
 
-* Thu Jul 18 2013 Krzysztof Jackiewicz - 0.0.51.SLP
+* Thu Jul 18 2013 Krzysztof Jackiewicz - 0.0.51
 - File locking added
 
-* Thu Jul 11 2013 Krzysztof Jackiewicz - 0.0.50.SLP
+* Thu Jul 11 2013 Krzysztof Jackiewicz - 0.0.50
 - Fix wrong passing va_list to function
 
-* Tue Jul  9 2013 Krzysztof Jackiewicz - 0.0.49.SLP
+* Tue Jul  9 2013 Krzysztof Jackiewicz - 0.0.49
 - fix segmentation fault issue - check invalid parameter
 - Change API function naming sheme
 - Fixing segfault in libprivilege-control
 
-* Mon Jul  8 2013 Krzysztof Jackiewicz - 0.0.48.SLP
+* Mon Jul  8 2013 Krzysztof Jackiewicz - 0.0.48
 - Adding a new OSP privilege "http://tizen.org/privilege/secureelement
 - Exclude SMACK rules files from libprivilege-control package.
 - Changed dlog logging buffer.
 
-* Tue Jul  2 2013 Krzysztof Jackiewicz - 0.0.47.SLP
+* Tue Jul  2 2013 Krzysztof Jackiewicz - 0.0.47
 - Fixing prevent defects in libprivilege-control
 
-* Fri Jun 28 2013 Krzysztof Jackiewicz - 0.0.46.SLP
+* Fri Jun 28 2013 Krzysztof Jackiewicz - 0.0.46
 - Implementation of background rule loading
 - Adding Smack rules for clipboard for OSP and web apps
 - Adding Smack rule for all web app to read a file created by osp-app-service
@@ -172,16 +390,16 @@
 - Early rule loading - livebox issue.
 - Adding script for early rules loading
 
-* Wed Jun 26 2013 Tomasz Swierczek - 0.0.45.SLP
+* Wed Jun 26 2013 Tomasz Swierczek - 0.0.45
 - add new smack rule for WRT
 - Fixing prevent bugs on libprivilege-control
 - Adding Smack rules for some privileges
 
-* Thu Jun 20 2013 Bartlomiej Grzelewski - 0.0.44.SLP
+* Thu Jun 20 2013 Bartlomiej Grzelewski - 0.0.44
 - Fixing Log
 - Reducing error logs number.
 
-* Wed Jun 19 2013 Bartlomiej Grzelewski - 0.0.43.SLP
+* Wed Jun 19 2013 Bartlomiej Grzelewski - 0.0.43
 - Fixing prevent critical defects in libprivilege-control and some log
   messages.
 - Adding sdbd Smack rule for all web apps to enable inspector
@@ -189,7 +407,7 @@
 - add smack rules for WRT app
 - Fixing NULL check for dac file.
 
-* Tue Jun 11 2013 Bartlomiej Grzelewski - 0.0.42.SLP
+* Tue Jun 11 2013 Bartlomiej Grzelewski - 0.0.42
 - Adding Smack rules for various privileges
 - Fixing typo and removing useless rules
 - Adding Smack rules that contacts-service can read vcard
@@ -201,7 +419,7 @@
   various Smack files
 - Log messages refactoring
 
-* Tue Jun  4 2013 Krzysztof Jackiewicz - 0.0.41.SLP
+* Tue Jun  4 2013 Krzysztof Jackiewicz - 0.0.41
 - Fast boot optimization
 - Adding Smack rules for various privileges
 - Adding rules for various privileges
@@ -214,7 +432,7 @@
 - Fixing partner and platform files for WRT and OSP.
 - Add value APP_PATH_ANY_LABEL to enum app_path_type_t.
 
-* Tue May 28 2013 Krzysztof Jackiewicz - 0.0.40.SLP
+* Tue May 28 2013 Krzysztof Jackiewicz - 0.0.40
 - Add implementation for appsetting privilege
 - Change parameter names app_id to pkg_id in API functions
 - Revert "Fixing app_revoke_internal() used by app_revoke_permissions()"
@@ -226,10 +444,10 @@
 - Adding rules regarding bookmark and web privilege
 - Adding rules regarding datasync privilege
 
-* Mon May 27 2013 Krzysztof Jackiewicz - 0.0.39.SLP
+* Mon May 27 2013 Krzysztof Jackiewicz - 0.0.39
 - Adjusting Smack rules for some privileges
 
-* Mon May 27 2013 Krzysztof Jackiewicz - 0.0.38.SLP
+* Mon May 27 2013 Krzysztof Jackiewicz - 0.0.38
 - Adjusting Rules for WRT and indicator
 - Adjusting Rules for OSP and indicator
 - Adding rwx for sdb Smack rule
@@ -250,11 +468,11 @@
 - Code refactoring, new internal function for adding single rule for an application.
 - New API for labeling directories and files.
 
-* Mon May 13 2013 Krzysztof Jackiewicz - 0.0.37.SLP
+* Mon May 13 2013 Krzysztof Jackiewicz - 0.0.37
 - Removing redundant osp-security-service rules for OSP Smack rule
 - Update the OSP.smack file
 - Add some rules into the OSP.smack and WRT.smack file
-- [Add rules] com.samsung.indicator w (OSP.smack and WRT.smack)
+- [Add rules] org.tizen.indicator w (OSP.smack and WRT.smack)
 - [Remove rules] wrt-launcher rwxa- (WRT.smack)
 - [Remove rules] wrt-commons::db_wrt
 - WRT_asf.browse.smack, WRT_asf.discovery.smack, WRT_asf.rendercontrol.smack,
@@ -263,7 +481,7 @@
   OSP_settingmanager.read.smack OSP_settingmanager.write.smack created.
 - Added rules for OSP/WRT apps for app_give_access API usage in security-server
 
-* Wed May  8 2013 Tomasz Swierczek - 0.0.36.SLP
+* Wed May  8 2013 Tomasz Swierczek - 0.0.36
 - add new smack rules for OSP installation
 - add new smack labels for vconf and support IPv6
 - add new labels for vconf
@@ -280,34 +498,34 @@
 - Fix for 64 bit compatibility.
 - Clean up libprivilege-control code
 
-* Tue Apr 30 2013 Krzysztof Jackiewicz - 0.0.35.SLP
+* Tue Apr 30 2013 Krzysztof Jackiewicz - 0.0.35
 - Add AV custom rule set support
 - Klocwork bugfixes
 - Add DAC config files for DB access control.
 - add new smack rules
 - Allow multiple call of app_give_access.
 
-* Mon Apr 29 2013 Krzysztof Jackiewicz - 0.0.34.SLP
+* Mon Apr 29 2013 Krzysztof Jackiewicz - 0.0.34
 - Change all logs in libprivilege-control to printf
 - Remove SMACK_ENABLED ifdefs.
 - Fix for complimentary groups setting.
 - Adding more rules for Felica privilege
 - Adding more rules for Felica privilege for OSP
 
-* Wed Apr 24 2013 Krzysztof Jackiewicz - 0.0.33.SLP
+* Wed Apr 24 2013 Krzysztof Jackiewicz - 0.0.33
 - Create separate source file for internal, common code.
 - Simplify cleanup code by using GCC extension for variable scoping.
 - app_shared_dir_add_readers() accepts NULL in 'app_list' not ""
 - Setting WebAPP label to pkgId again.
 
-* Thu Apr 18 2013 Krzysztof Jackiewicz - 0.0.31.SLP
+* Thu Apr 18 2013 Krzysztof Jackiewicz - 0.0.31
 - Don't delete SMACK rules file for app in function app_reset_permissions()
 
-* Thu Apr 18 2013 Krzysztof Jackiewicz - 0.0.30.SLP
+* Thu Apr 18 2013 Krzysztof Jackiewicz - 0.0.30
 - add new smack rule for WRT app
 - Temporary workaround for complimentary groups not working on non-SMACK system.
 
-* Wed Apr 17 2013 Krzysztof Jackiewicz - 0.0.29.SLP
+* Wed Apr 17 2013 Krzysztof Jackiewicz - 0.0.29
 - OSP smack rules for native apps updated
 - Added add_api_feature API
 - Added support for gids in add_new_feature API
@@ -333,7 +551,7 @@
 - Add implementation of API function add_shared_dir_readers.
 - Add check if app_label and shared_label are different in app_label_shared_dir
 
-* Thu Mar 28 2013 Tomasz Swierczek - 0.0.28.SLP
+* Thu Mar 28 2013 Tomasz Swierczek - 0.0.28
 - Update smack files for WRT devcap.
 - Update smack files for all Privilege OSP applications.
 - Smack rules for manual WRT tests added
@@ -343,11 +561,11 @@
 - Fix ifdef for debug logging.
 - Fix logging in app_add_permissions_internal()
 
-* Tue Mar 26 2013 Krzysztof Jackiewicz - 0.0.27.SLP
+* Tue Mar 26 2013 Krzysztof Jackiewicz - 0.0.27
 - Fix for compatibility of GCC 4.7.
 - Implicitly include base permission in app_enable_permissions().
 
-* Tue Mar 26 2013 Krzysztof Jackiewicz - 0.0.26.SLP
+* Tue Mar 26 2013 Krzysztof Jackiewicz - 0.0.26
 - Update OSP smack config files.
 - Include base set of Smack rules for OSP apps.
 - New API function app_add_friend(app_id1, app_id2).
@@ -363,7 +581,7 @@
 - WRT smack rules updated
 - Added stub for add_shared_dir_readers function.
 
-* Fri Mar 15 2013 Krzysztof Jackiewicz - 0.0.25.SLP
+* Fri Mar 15 2013 Krzysztof Jackiewicz - 0.0.25
 - Refactoring: adjust names of some internal identifiers.
 - Remove prefix from process labels of WRT applications.
 - Provide app_reset_permissions() API function.
@@ -373,7 +591,7 @@
 - Remove legacy code for WRT, enable new WRT functionality.
 
 
-* Wed Feb 13 2013 Rafal Krypa - 0.0.24.SLP
+* Wed Feb 13 2013 Rafal Krypa - 0.0.24
 - Refactoring: adjust names of some internal identifiers.
 - Remove prefix from process labels of WRT applications.
 - Provide app_reset_permissions() API function.
@@ -382,22 +600,22 @@
 - Recreate Smack configuration files for WRT devcaps.
 - Remove legacy code for WRT, enable new WRT functionality.
 
-* Wed Feb 06 2013 Rafal Krypa - 0.0.23.SLP
+* Wed Feb 06 2013 Rafal Krypa - 0.0.23
 - Fixing bug in setting execute label for executable files.
 - Correct bug in dir_set_smack_r() introduced by previous fix.
 - Fix implementation of setting process label from Smack exec label.
 
-* Tue Feb 05 2013 Tomasz Swierczek - 0.0.22.SLP
+* Tue Feb 05 2013 Tomasz Swierczek - 0.0.22
 - change label - system::crash -> sys-assert::core.
 - add new default smack rule.
 - Changes for label settings on directories API.
 - Fix segfault in DLOG in dir_set_smack_r function.
 - Correct debug in dir_set_smack_r().
 
-* Fri Feb 01 2013 Rafal Krypa - 0.0.21.SLP
+* Fri Feb 01 2013 Rafal Krypa - 0.0.21
 - Adding new API for setting label and transmute on directory
 
-* Tue Jan 30 Rafal Krypa - 0.0.20.SLP
+* Tue Jan 30 Rafal Krypa - 0.0.20
 - remove passwd and group from conf package.
 - add new label - system::media.
 - add application into a new group.

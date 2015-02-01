@@ -1,0 +1,2 @@
+--PRAGMA journal_mode = PERSIST;
+--for technical reasons all data is added in update-rules-db-to-v4.sql
