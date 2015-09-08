@@ -35,6 +35,7 @@ sasl:*:45:
 plugdev:*:46:
 staff:*:50:
 games:*:60:
+dbus:*:81:
 users:*:100:
 nogroup:*:65534:
 app:x:5000:
@@ -97,6 +98,7 @@ vconf_sync:x:6523:app
 ss_drmkey:x:6601:app
 ss_ssaccount:x:6602:app
 ss_activesync:x:6603:app
+ss_privatekey:x:6604:app
 system_time:x:6701:app
 system_bklight:x:6702:app
 system_torch:x:6703:app

@@ -1,7 +1,7 @@
 prefix=@PREFIX@
 exec_prefix=@EXEC_PREFIX@
-libdir=@LIBDIR@
-includedir=@INCLUDEDIR@
+libdir=@LIB_INSTALL_DIR@
+includedir=@INCLUDE_INSTALL_DIR@
 
 Name: libprivilege-control 
 Description: Library to control privilege of application

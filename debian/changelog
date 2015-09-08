@@ -1,3 +1,714 @@
+libprivilege-control (0.0.54) unstable; urgency=low
+
+  [ Jan Cybulski ]
+  * Adapt code for new libsmack API
+
+ -- Rafal Krypa <r.krypa@samsung.com>  Tue, 13 Aug 2013 12:56:21 +0200
+
+libprivilege-control (0.0.53) unstable; urgency=low
+
+  [ Lukasz Kostyra ]
+  * Fix libprivilege-control not checking input parameters
+  * Add better debug logs to libprivilege-control
+
+  [ Zofia Abramowska ]
+  * Fixing language errors
+
+  [ Bartlomiej Grzelewski ]
+  * Remove deprected code.
+
+  [ Jan Cybulski ]
+  * Add support for EFL apps
+
+  [ Rafal Krypa ]
+  * Rewrite internal function app_uninstall_remove_early_rules()
+  * Create format strings for scanf statically.
+  * Add support for new access mode for setting locks ("l")
+
+ -- Bartlomiej Grzelewski <b.grzelewski@samsung.com>  Thu, 1 Aug 2013 12:04:06 +0200
+
+libprivilege-control (0.0.52) unstable; urgency=low
+
+  [ Pawel Polawski ]
+  * Loading all smack-app rules during boot
+
+  [ Janusz Kozerski ]
+  * Add generic solution for adding rules to shared dirs (RO & RW)
+
+ -- Bartlomiej Grzelewski <b.grzelewski@samsung.com>  Mon, 22 Jul 2013 11:41:29 +0200
+
+libprivilege-control (0.0.51) unstable; urgency=low
+
+  * File locking added
+
+ -- Krzysztof Jackiewicz <k.jackiewicz@samsung.com>  Thu, 18 Jul 2013 10:41:51 +0200
+
+libprivilege-control (0.0.50) unstable; urgency=low
+
+  [ Janusz Kozerski ]
+  * Fix wrong passing va_list to function
+
+ -- Krzysztof Jackiewicz <k.jackiewicz@samsung.com>  Thu, 11 Jul 2013 15:05:55 +0200
+
+libprivilege-control (0.0.49) unstable; urgency=low
+
+  [ Kidong Kim ]
+  * fix segmentation fault issue - check invalid parameter
+
+  [ Jan Cybulski ]
+  * Change API function naming sheme
+
+  [ Zbigniew Jasinski ]
+  * Fixing segfault in libprivilege-control
+
+ -- Krzysztof Jackiewicz <k.jackiewicz@samsung.com>  Tue, 9 Jul 2013 18:44:18 +0200
+
+libprivilege-control (0.0.48) unstable; urgency=low
+
+  [ Bumjin Im ]
+  * Adding a new OSP privilege "http://tizen.org/privilege/secureelement
+
+  [ Zbigniew Jasinski ]
+  * Exclude SMACK rules files from libprivilege-control package.
+
+  [ Jan Olszak ]
+  * Changed dlog logging buffer.
+
+ -- Krzysztof Jackiewicz <k.jackiewicz@samsung.com>  Mon, 8 Jul 2013 11:52:48 +0200
+
+libprivilege-control (0.0.47) unstable; urgency=low
+
+  [ Marcin Niesluchowski ]
+  * Fixing prevent defects in libprivilege-control
+
+ -- Krzysztof Jackiewicz <k.jackiewicz@samsung.com>  Tue, 2 Jul 2013 17:34:24 +0200
+
+libprivilege-control (0.0.46) unstable; urgency=low
+
+  [ Pawel Polawski ]
+  * Implementation of background rule loading
+
+  [ Bumjin Im ]
+  * Adding Smack rules for clipboard for OSP and web apps
+  * Adding Smack rule for all web app to read a file created by osp-app-service
+  * Modifying Smack rules for notification related privileges
+
+  [ Janusz Kozerski ]
+  * Early rule loading - livebox issue.
+
+  [ Zofia Abramowska ]
+  * Adding script for early rules loading
+
+ -- Krzysztof Jackiewicz <k.jackiewicz@samsung.com>  Fri, 28 Jun 2013 18:55:27 +0200
+
+libprivilege-control (0.0.45) unstable; urgency=low
+
+  [ Kidong Kim ]
+  * add new smack rule for WRT
+
+  [ Marcin Niesluchowski ]
+  * Fixing prevent bugs on libprivilege-control
+
+  [ Bumjin Im ]
+  * Adding Smack rules for some privileges
+
+ -- Tomasz Swierczek <t.swierczek@samsung.com>  Wed, 26 Jun 2013 10:03:15 +0200
+
+libprivilege-control (0.0.44) unstable; urgency=low
+
+  [ Zofia Abramowska ]
+  * Fixing Log
+
+  [ Marcin Niesluchowski ]
+  * Reducing error logs number.
+
+ -- Bartlomiej Grzelewski <b.grzelewski@samsung.com>  Thu, 20 Jun 2013 18:32:03 +0200
+
+libprivilege-control (0.0.43) unstable; urgency=low
+
+  [ Marcin Niesluchowski ]
+  * Fixing prevent critical defects in libprivilege-control and some log
+    messages.
+
+  [ Bumjin Im ]
+  * Adding sdbd Smack rule for all web apps to enable inspector
+  * Adding Smack rules for antivirus
+
+  [ Kidong Kim ]
+  * add smack rules for WRT app
+
+  [ Marcin Niesluchowski ]
+  * Fixing NULL check for dac file.
+
+ -- Bartlomiej Grzelewski <b.grzelewski@samsung.com>  Wed, 19 Jun 2013 15:48:14 +0200
+
+libprivilege-control (0.0.42) unstable; urgency=low
+
+  [ Bumjin Im ]
+  * Adding Smack rules for various privileges
+  * Fixing typo and removing useless rules
+  * Adding Smack rules that contacts-service can read vcard
+  * Adding Smack rules for a new privilege (temporary solution)
+  * Removing Smack rules for non-existing (removed) privileges
+  * Removing redundant Smack rules in various privleges
+  * Fixing Rule Loading fail for livebox apps on next reboot
+  * Adding Smack rule for bluetooth.oop privilege and modifying file mode of
+    various Smack files
+
+  [ Zbigniew Jasinski ]
+  * Log messages refactoring
+
+ -- Bartlomiej Grzelewski <b.grzelewski@samsung.com>  Tue, 11 Jun 2013 15:01:36 +0200
+
+libprivilege-control (0.0.41) unstable; urgency=low
+
+  [ Janusz Kozerski ]
+  * Fast boot optimization
+
+  [ Bumjin Im ]
+  * Adding Smack rules for various privileges
+  * Adding rules for various privileges
+  * Adding rules for web browser user agent
+  * Adding Smack manifest for libprivilege-control to support proper labeling
+    when the package is installed by sdbd
+  * Adjusting Smack rules for email-service to allow anybody to open the IPC
+  * Modify Smack rules for notification privilege --> Will use user space Smack
+
+  [ Tomasz Swierczek ]
+  * Fixed creation of rule sets with missing ----- (change-rule interface)
+
+  [ Marcin Niesluchowski ]
+  * Fixing partner and platform files for WRT and OSP.
+
+  [ Bartlomiej Grzelewski ]
+  * Add value APP_PATH_ANY_LABEL to enum app_path_type_t.
+
+ -- Krzysztof Jackiewicz <k.jackiewicz@samsung.com>  Tue, 4 Jun 2013 17:36:58 +0200
+
+libprivilege-control (0.0.40) unstable; urgency=low
+
+  [ Jan Cybulski ]
+  * Add implementation for appsetting privilege
+  * Change parameter names app_id to pkg_id in API functions
+
+  [ Marcin Niesluchowski ]
+  * Revert "Fixing app_revoke_internal() used by app_revoke_permissions()"
+  * Comment to app_revoke_permissions() changed.
+
+  [ Kidong Kim ]
+  * fix dependency
+
+  [ Bumjin Im ]
+  * Modifying Smack rules for pkgmgr related privileges and fix type
+  * Adding rules regarding messaging privilege
+  * Adding rules regarding camera privilege
+  * Adding rules regarding bookmark and web privilege
+  * Adding rules regarding datasync privilege
+
+ -- Krzysztof Jackiewicz <k.jackiewicz@samsung.com>  Tue, 28 May 2013 15:26:43 +0200
+
+libprivilege-control (0.0.39) unstable; urgency=low
+
+  [ Bumjin Im ]
+  * Adjusting Smack rules for some privileges
+
+ -- Krzysztof Jackiewicz <k.jackiewicz@samsung.com>  Mon, 27 May 2013 16:16:08 +0200
+
+libprivilege-control (0.0.38) unstable; urgency=low
+
+  [ Bumjin Im ]
+  * Adjusting Rules for WRT and indicator
+  * Adjusting Rules for OSP and indicator
+  * Adding rwx for sdb Smack rule
+  * Reducing redundant rules for OSP/Web apps
+  * Applying Smack rules for each privilege
+  * Adjusting Smack rules for some privileges
+
+  [ Kidong Kim ]
+  * add new smack rules for web app
+  * remove rc#.d script
+  * fix codes related with systemd
+
+  [ Zofia Abramowska ]
+  * Marking app_give_access & app_revoke_access as deprecated
+  * Changing way of mapping feature to file name
+
+  [ Marcin Niesluchowski ]
+  * Fixing app_revoke_internal() used by app_revoke_permissions()
+  * privilege-control.c and privilege-control.h extended by new app_type_t values.
+
+  [ Krzysztof Jackiewicz ]
+  * WRT binary link handling updated.
+
+  [ Janusz Kozerski ]
+  * Add API functions smack_pid_have_access and get_smack_label_from_process.
+  * Implement special handling for http://tizen.org/privilege/antivirus
+
+  [ Bartlomiej Grzelewski ]
+  * Add error logs in app_give_access.
+
+  [ Rafal Krypa ]
+  * Code refactoring, new internal function for adding single rule for an application.
+  * New API for labeling directories and files.
+
+ -- Krzysztof Jackiewicz <k.jackiewicz@samsung.com>  Mon, 27 May 2013 15:36:57 +0200
+
+libprivilege-control (0.0.37) unstable; urgency=low
+
+  [ Bumjin Im ]
+  * Removing redundant osp-security-service rules for OSP Smack rule
+
+  [ Jinha Hwang ]
+  * Update the OSP.smack file
+  * Add some rules into the OSP.smack and WRT.smack file
+  * [Add rules] org.tizen.indicator w (OSP.smack and WRT.smack)
+  * [Remove rules] wrt-launcher rwxa- (WRT.smack)
+  * [Remove rules] wrt-commons::db_wrt
+
+  [ Marcin Niesluchowski ]
+  * WRT_asf.browse.smack, WRT_asf.discovery.smack, WRT_asf.rendercontrol.smack,
+    WRT_asf.smack, WRT_asf.tvcontrol.smack, WRT_asf.upload.smack created.
+  * OSP_audiomanager.volume.smack OSP_packagemanager.setting.smack
+    OSP_settingmanager.read.smack OSP_settingmanager.write.smack created.
+
+  [ Tomasz Swierczek ]
+  * Added rules for OSP/WRT apps for app_give_access API usage in security-server
+
+ -- Krzysztof Jackiewicz <k.jackiewicz@samsung.com>  Mon, 13 May 2013 19:13:19 +0200
+
+libprivilege-control (0.0.36) unstable; urgency=low
+
+  [ Kidong Kim ]
+  * add new smack rules for OSP installation
+  * add new smack labels for vconf and support IPv6
+  * add new labels for vconf
+
+  [ Bumjin Im ]
+  * Modifying Rules for OSP services
+  * Adding more rules for osp-connectivity-service and etc.
+  * Adding rule for OSP data sharing
+  * Adding user space Smack rules
+  * Removing redundant default rules
+  * Removing redundant default rules for WRT
+  * Fixing Typo on OSP rules
+  * Modifying WRT.smack file because wrt-launcher changes its label
+  * Temporary fix for wrt-launcher. Rolling back previous rule with
+    remaining new rule
+
+  [ Junfeng Dong ]
+  * Fix for 64 bit compatibility.
+
+  [ Krzysztof Jackiewicz ]
+  * Clean up libprivilege-control code
+
+ -- Tomasz Swierczek <t.swierczek@samsung.com>  Wed, 8 May 2013 09:24:43 +0200
+
+libprivilege-control (0.0.35) unstable; urgency=low
+
+  [ Janusz Kozerski ]
+  * Add AV custom rule set support
+
+  [ Krzysztof Jackiewicz ]
+  * Klocwork bugfixes
+
+  [ Rafal Krypa ]
+  * Add DAC config files for DB access control.
+
+  [ Kidong Kim ]
+  * add new smack rules
+
+  [ Bartlomiej Grzelewski ]
+  * Allow multiple call of app_give_access.
+
+ -- Krzysztof Jackiewicz <k.jackiewicz@samsung.com>  Tue, 30 Apr 2013 17:06:16 +0200
+
+libprivilege-control (0.0.34) unstable; urgency=low
+
+  [ Jan Cybulski ]
+  * Change all logs in libprivilege-control to printf
+
+  [ Rafal Krypa ]
+  * Remove SMACK_ENABLED ifdefs.
+  * Fix for complimentary groups setting.
+
+  [ Bumjin Im ]
+  * Adding more rules for Felica privilege
+  * Adding more rules for Felica privilege for OSP
+
+ -- Krzysztof Jackiewicz <k.jackiewicz@samsung.com>  Mon, 29 Apr 2013 16:03:37 +0200
+
+libprivilege-control (0.0.33) unstable; urgency=low
+
+  [ Rafal Krypa ]
+  * Create separate source file for internal, common code.
+  * Simplify cleanup code by using GCC extension for variable scoping.
+
+  [ Jan Cybulski ]
+  * app_shared_dir_add_readers() accepts NULL in 'app_list' not ""
+
+  [ Tomasz Swierczek ]
+  * Setting WebAPP label to pkgId again.
+
+ -- Krzysztof Jackiewicz <k.jackiewicz@samsung.com>  Wed, 24 Apr 2013 15:04:10 +0200
+
+libprivilege-control (0.0.31) unstable; urgency=low
+
+  [ Rafal Krypa ]
+  * Don't delete SMACK rules file for app in function app_reset_permissions()
+
+ -- Krzysztof Jackiewicz <k.jackiewicz@samsung.com>  Thu, 18 Apr 2013 17:48:27 +0200
+
+libprivilege-control (0.0.30) unstable; urgency=low
+
+  [ Kidong Kim ]
+  * add new smack rule for WRT app
+
+  [ Rafal Krypa ]
+  * Temporary workaround for complimentary groups not working on non-SMACK system.
+
+ -- Krzysztof Jackiewicz <k.jackiewicz@samsung.com>  Thu, 18 Apr 2013 16:47:37 +0200
+
+libprivilege-control (0.0.29) unstable; urgency=low
+
+  [ Krzysztof Jackiewicz ]
+  * OSP smack rules for native apps updated
+  * Added add_api_feature API
+  * Added support for gids in add_new_feature API
+
+  [ Rafal Krypa ]
+  * Add missing empty OSP Smack permission files for API features.
+  * Add debug logging into app_install() and app_uninstall()
+  * Check validity of Smack labels in API function arguments.
+  * Revert "Temporary fix for web app launching."
+  * Imlement app_disable_permissions() API function stub.
+  * Fix logging ifdefs in slp-su.c.
+  * Full set of SMACK rules support for OSP and WRT
+  * Unify code indentation.
+  * Change implementation of have_smack()
+  * Truncate Smack file for app in app_revoke_permissions().
+  * Implement adding apps to additional groups based on enabled permissions.
+
+  [ Kidong Kim ]
+  * add phone-tabui-efl package into admin group
+  * add phone-tabui-efl package into admin group
+  * add new label for clipboard
+
+  [ Bartlomiej Grzelewski ]
+  * Implemet data control solution for OSP apps.
+  * Reduce complexity from O(n) to O(log(n)) druing state search.
+
+  [ Janusz Kozerski ]
+  * Create additional .smack files for OSP/WRT new API feature - felica.
+  * Add API for install antivirus (app_register_av API function).
+    Add abstract layer to libprivilege database.
+
+  [ Jan Cybulski ]
+  * Add implementation of API function add_shared_dir_readers.
+  * Add check if app_label and shared_label are different in app_label_shared_dir
+
+ -- Krzysztof Jackiewicz <k.jackiewicz@samsung.com>  Wed, 17 Apr 2013 21:13:35 +0200
+
+libprivilege-control (0.0.28) unstable; urgency=low
+
+  [ Janusz Kozerski ]
+  * Update smack files for WRT devcap.
+
+  [ Bartlomiej Grzelewski ]
+  * Update smack files for all Privilege OSP applications.
+
+  [ Krzysztof Jackiewicz ]
+  * Smack rules for manual WRT tests added
+  * Smack rules for manual OSP tests added
+
+  [ Rafal Krypa ]
+  * Fix app_install function.
+  * Fix error handling in perm_to_smack() internal function.
+  * Fix ifdef for debug logging.
+  * Fix logging in app_add_permissions_internal()
+
+ -- Tomasz Swierczek <t.swierczek@samsung.com>  Thu, 28 Mar 2013 09:07:51 +0100
+
+libprivilege-control (0.0.27) unstable; urgency=low
+
+  [ Junfeng Dong ]
+  * Fix for compatibility of GCC 4.7.
+
+  [ Rafal Krypa ]
+  * Implicitly include base permission in app_enable_permissions().
+
+ -- Krzysztof Jackiewicz <k.jackiewicz@samsung.com>  Tue, 26 Mar 2013 16:05:07 +0100
+
+libprivilege-control (0.0.26) unstable; urgency=low
+
+  [ Rafal Krypa ]
+  * Update OSP smack config files.
+  * Include base set of Smack rules for OSP apps.
+  * New API function app_add_friend(app_id1, app_id2).
+  * Add new API functions app_install() and app_uninstall().
+  * Add new API function app_enable_permissions() to replace
+    app_add_permissions() and app_add_volatile_permissions().
+  * Don't fail when trying to enable app permissions that doesn't exist.
+
+  [ Pawel Polawski ]
+  * Update OSP smack config files.
+
+  [ Janusz Kozerski ]
+  * Update WRT smack files for devcaps: alarm, application, bookmark, calendar,
+    callhistory, contact, content, datasync, download, messaging,
+    networkbearerselection, nfc.
+
+  [ Bartlomiej Grzelewski ]
+  * Update smack files for OSP applications.
+
+  [ Krzysztof Jackiewicz ]
+  * WRT smack rules updated
+
+  [ Tomasz Swierczek ]
+  * Added stub for add_shared_dir_readers function.
+
+ -- Krzysztof Jackiewicz <k.jackiewicz@samsung.com>  Tue, 26 Mar 2013 10:02:46 +0100
+
+libprivilege-control (0.0.25) unstable; urgency=low
+
+  [ Rafal Krypa ]
+  * Refactoring: adjust names of some internal identifiers.
+  * Remove prefix from process labels of WRT applications.
+  * Provide app_reset_permissions() API function.
+  * Provide app_add_volatile_permissions() API function.
+  * Rewrite internal function set_smack_for_wrt().
+  * Recreate Smack configuration files for WRT devcaps.
+  * Remove legacy code for WRT, enable new WRT functionality.
+
+ -- Krzysztof Jackiewicz <k.jackiewicz@samsung.com>  Fri, 15 Mar 2013 09:59:37 +0100
+
+libprivilege-control (0.0.24) unstable; urgency=low
+
+  * Refactoring: adjust names of some internal identifiers.
+  * Remove prefix from process labels of WRT applications.
+  * Provide app_reset_permissions() API function.
+  * Provide app_add_volatile_permissions() API function.
+  * Rewrite internal function set_smack_for_wrt().
+  * Recreate Smack configuration files for WRT devcaps.
+  * Remove legacy code for WRT, enable new WRT functionality.
+
+ -- Rafal Krypa <r.krypa@samsung.com>  Wed, 13 Feb 2013 16:48:06 +0100
+
+libprivilege-control (0.0.23) unstable; urgency=low
+
+  [ Zofia Abramowska ]
+  * Fixing bug in setting execute label for executable files.
+
+  [ Rafal Krypa ]
+  * Correct bug in dir_set_smack_r() introduced by previous fix.
+  * Fix implementation of setting process label from Smack exec label.
+
+ -- Rafal Krypa <r.krypa@samsung.com>  Wed, 06 Feb 2013 13:22:21 +0100
+
+libprivilege-control (0.0.22) unstable; urgency=low
+
+  [ Kidong Kim ]
+  * change label - system::crash -> sys-assert::core.
+  * add new default smack rule.
+
+  [ Zofia Abramowska ]
+  * Changes for label settings on directories API.
+
+  [ Janusz Kozerski ]
+  * Fix segfault in DLOG in dir_set_smack_r function.
+
+  [ Rafal Krypa ]
+  * Correct debug in dir_set_smack_r().
+
+ -- Tomasz Swierczek <t.swierczek@samsung.com>  Tue, 05 Feb 2013 09:26:44 +0100
+
+libprivilege-control (0.0.21) unstable; urgency=low
+
+  [ Zofia Abramowska ]
+  * Adding new API for setting label and transmute on directory
+
+ -- Rafal Krypa <r.krypa@samsung.com>  Fri, 01 Feb 2013 17:19:53 +0100
+
+libprivilege-control (0.0.20) unstable; urgency=low
+
+  [ Kidong Kim ]
+  * remove passwd and group from conf package.
+  * add new label - system::media.
+  * add application into a new group.
+
+  [ Mariusz Domanski ]
+  * Prevent related bugfixes.
+
+  [ Jan Olszak ]
+  * Bug fix in adding permissions.
+
+  [ Janusz Kozerski ]
+  * Implement logging in libprivilege-control.
+
+  [ Rafal Krypa ]
+  * Fix parsing of Smack config files.
+  * Remove some unnecessary code from wrt_set_src_dir() and wrt_set_data_dir().
+
+ -- Rafal Krypa <r.krypa@@samsung.com>  Wed, 30 Jan 2013 16:12:08 +0100
+
+libprivilege-control (0.0.19) unstable; urgency=low
+
+  [ Rafal Krypa ]
+  * Remove stale permission files.
+  * Introduce WRT_ prefix in smack for current SMACK configuration files.
+  * Drop legacy USE_PRIVILEGE_CONTROL ifdef.
+  * Change syntax of SMACK config files.
+  * New API for native/OSP installer.
+
+ -- Rafal Krypa <r.krypa@samsung.com>  Thu, 10 Jan 2013 17:42:37 +0100
+
+libprivilege-control (0.0.18) unstable; urgency=low
+
+  [ Halton Huo ]
+  * Modify label for browser db files
+
+  [ Rafal Krypa ]
+  * smack_default_labeling: use variables for various /opt/* paths.
+
+ -- Rafal Krypa <r.krypa@samsung.com>  Tue, 08 Jan 2013 11:44:06 +0100
+
+libprivilege-control (0.0.17) unstable; urgency=low
+
+  * Re-enable Smack setting for native apps.
+  * Fix app type checking in set_app_privilege().
+
+ -- Rafal Krypa <r.krypa@samsung.com>  Thu, 03 Jan 2013 12:48:22 +0100
+
+libprivilege-control (0.0.16) unstable; urgency=low
+
+  [ Zbigniew Kostrzewa ]
+  * Add build type required for code coverage analysis.
+
+  [ Karol Lewandowski ]
+  * udev rules: Allow ordinary users use DRM
+  * systemd: Add systemd unit to set default smack labels
+
+  [ Rafal Krypa ]
+  * Separate ifdefs for Smack support for WRT.
+
+ -- Rafal Krypa <r.krypa@samsung.com>  Thu, 13 Dec 2012 17:52:24 +0100
+
+libprivilege-control (0.0.15) unstable; urgency=low
+
+  [ Kidong Kim ]
+  * fix db label
+  * fix udev and add new db
+
+  [ Rafal Krypa ]
+  * cmake: change the way the udev files are installed.
+  * udev: change heuristics for guessing camera device nodes
+
+ -- Kidong Kim <kd0228.kim@samsung.com>  Thu, 13 Dec 2012 11:26:57 +0900
+
+libprivilege-control (0.0.14) unstable; urgency=low
+
+  [ Karol Lewandowski ]
+  * Add dbus user and group for proper priviledge separation in dbus' "--system" service
+
+  [ Pawel Polawski ]
+  * Fix problems reported on Coverity
+
+ -- Tomasz Swierczek <t.swierczek@samsung.com>  Fri, 16 Nov 2012 16:56:46 +0100
+
+libprivilege-control (0.0.13) unstable; urgency=low
+
+  * add call application into admin group
+
+ -- Kidong Kim <kd0228.kim@samsung.com>  Thu, 01 Nov 2012 16:10:34 +0900
+
+libprivilege-control (0.0.12) unstable; urgency=low
+
+  [ Rafal Krypa ]
+  * Merge versions 0.0.7.4 and 0.0.11.
+  * Change widget id type from int to string.
+
+  [ Krzysztof Jackiewicz ]
+  * License file copied to /usr/share/license/
+
+ -- Rafal Krypa <r.krypa@samsung.com>  Tue, 16 Oct 2012 11:37:34 +0900
+
+libprivilege-control (0.0.11) unstable; urgency=low
+
+  * Fix definitions passed in CMake.
+  * Add API function wrt_set_privilege() for setting web app privilege from inside WRT.
+
+ -- Rafal Krypa <r.krypa@samsung.com>  Fri, 14 Sep 2012 20:26:42 +0200
+
+libprivilege-control (0.0.10) unstable; urgency=low
+
+  * Revert automatic tests of SMACK API to fix build dependench cycle.
+  * packaging: use macros for installation directories.
+
+ -- Rafal Krypa <r.krypa@samsung.com>  Thu, 13 Sep 2012 12:57:49 +0200
+
+libprivilege-control (0.0.9) unstable; urgency=low
+
+  [ Pawel Polawski ]
+  * Added automatic tests of SMACK API.
+
+  [ Rafal Krypa ]
+  * Provide udev rules file in the new location, for udev v182.
+
+ -- Rafal Krypa <r.krypa@samsung.com>  Thu, 13 Sep 2012 10:50:41 +0200
+
+libprivilege-control (0.0.8) unstable; urgency=low
+
+  * udev: set haptic devices to world readable and writable.
+  * Restructure setting of compilation flags in CmakeLists.
+  * Temporary turn off setting up of Smack labels and rules.
+  * Always call wrt_permissions_reset() internally during privilege setup for Widgets.
+  * Define a type for WRT widget id. Make it reflect the actual id type in WRT database.
+  * Add wrt_widget_id_from_socket() API function for reading widget id from UNIX sockets.
+  * Deprecate another old function for privilege control.
+  * Fix: remove unused variable.
+  * Fix: preserve const qualifier for strings.
+  * Fix: don't define functions that won't be used to avoid warnings.
+  * Compile with -Wall and -Werror to catch compilation warnings.
+
+ -- Rafal Krypa <r.krypa@samsung.com>  Fri, 07 Sep 2012 15:11:28 +0200
+
+libprivilege-control (0.0.7.4) unstable; urgency=low
+
+  * udev: set haptic devices to world readable and writable.
+
+ -- Rafal Krypa <r.krypa@samsung.com>  Wed, 10 Oct 2012 15:13:16 +0900
+
+libprivilege-control (0.0.7.3-1) unstable; urgency=low
+
+  * give all rules on device nodes
+
+ -- Kidong Kim <kd0228.kim@samsung.com>  Tue, 25 Sep 2012 15:36:45 +0200
+
+libprivilege-control (0.0.7.3) unstable; urgency=low
+
+  * packaging: add initial manifest file.
+  * Add configuration for default Smack rules and labels for the system.
+
+ -- Rafal Krypa <r.krypa@samsung.com>  Fri, 21 Sep 2012 13:43:03 +0200
+
+libprivilege-control (0.0.7.2) unstable; urgency=low
+
+  * Re-release, no source changes.
+
+ -- Rafal Krypa <r.krypa@samsung.com>  Thu, 20 Sep 2012 11:16:46 +0200
+
+libprivilege-control (0.0.7.1) unstable; urgency=low
+
+  * Provide udev rules file in the new location, for udev v182.
+
+ -- Rafal Krypa <r.krypa@samsung.com>  Wed, 19 Sep 2012 13:21:31 +0200
+
+libprivilege-control (0.0.7) unstable; urgency=low
+
+  * Introduce new function set_app_privilege() for comprehensive permissions setup.
+  * Modify udev rules as per Mr. Kidong Kim request.
+
+ -- Rafal Krypa <r.krypa@samsung.com>  Fri, 24 Aug 2012 16:48:16 +0200
+
 libprivilege-control (0.0.6) unstable; urgency=low
 
   * Another attempt to push package to OBS
@@ -35,7 +746,6 @@ libprivilege-control (0.0.2-43) unstable; urgency=low
 
   * change permission of usb_mtp_gadget device node
   * Tag: libprivilege-control_0.0.2-43
-  * Git: slp/pkgs/l/libprivilege-control
 
  -- Kidong Kim <kd0228.kim@samsung.com>  Mon, 21 May 2012 10:35:31 +0900
 
@@ -43,7 +753,6 @@ libprivilege-control (0.0.2-42) unstable; urgency=low
 
   * one rule for udev "/dev/srp" has been added
   * Tag: libprivilege-control_0.0.2-42
-  * Git: slp/pkgs/l/libprivilege-control
 
  -- Kidong Kim <kd0228.kim@samsung.com>  Fri, 23 Mar 2012 11:43:58 +0900
 
@@ -51,7 +760,6 @@ libprivilege-control (0.0.2-41) unstable; urgency=low
 
   * add app user into video_tel group
   * Tag: libprivilege-control_0.0.2-41
-  * Git: slp/pkgs/l/libprivilege-control
 
  -- Kidong Kim <kd0228.kim@samsung.com>  Sat, 11 Feb 2012 16:49:35 +0900
 
@@ -59,7 +767,6 @@ libprivilege-control (0.0.2-40) unstable; urgency=low
 
   * Remove 'inhouse' directory
   * Tag: libprivilege-control_0.0.2-40
-  * Git: slp/pkgs/l/libprivilege-control
 
  -- Kidong Kim <kd0228.kim@samsung.com>  Thu, 09 Feb 2012 17:41:32 +0900
 
@@ -67,7 +774,6 @@ libprivilege-control (0.0.2-39) unstable; urgency=low
 
   * add new group - video_tel(6528)
   * Tag: libprivilege-control_0.0.2-39
-  * Git: slp/pkgs/l/libprivilege-control
 
  -- Kidong Kim <kd0228.kim@samsung.com>  Tue, 07 Feb 2012 16:51:55 +0900
 
@@ -75,7 +781,6 @@ libprivilege-control (0.0.2-38) unstable; urgency=low
 
   * change ownership and permission of user home directory
   * Tag: libprivilege-control_0.0.2-38
-  * Git: slp/pkgs/l/libprivilege-control
 
  -- Kidong Kim <kd0228.kim@samsung.com>  Fri, 20 Jan 2012 08:49:29 +0900
 
@@ -83,7 +788,6 @@ libprivilege-control (0.0.2-37) unstable; urgency=low
 
   * remove a string 'inhouse' from all codes
   * Tag: libprivilege-control_0.0.2-37
-  * Git: slp/pkgs/l/libprivilege-control
 
  -- Kidong Kim <kd0228.kim@samsung.com>  Wed, 18 Jan 2012 12:06:34 +0900
 
@@ -91,7 +795,6 @@ libprivilege-control (0.0.2-36) unstable; urgency=low
 
   * change user name 'inhouse' of /etc/group file to 'app'
   * Tag: libprivilege-control_0.0.2-36
-  * Git: slp/pkgs/l/libprivilege-control
 
  -- Kidong Kim <kd0228.kim@samsung.com>  Sat, 14 Jan 2012 13:36:36 +0900
 
@@ -99,7 +802,6 @@ libprivilege-control (0.0.2-35) unstable; urgency=low
 
   * unify all application's user account to 'app' account
   * Tag: libprivilege-control_0.0.2-35
-  * Git: slp/pkgs/l/libprivilege-control
 
  -- Kidong Kim <kd0228.kim@samsung.com>  Tue, 10 Jan 2012 10:54:19 +0900
 
@@ -108,7 +810,6 @@ libprivilege-control (0.0.2-34) unstable; urgency=low
   * 11/12/23
   *  - add package name prefix - org. (for using tizen)
   * Tag: libprivilege-control_0.0.2-34
-  * Git: slp/pkgs/l/libprivilege-control
 
  -- Kidong Kim <kd0228.kim@samsung.com>  Fri, 23 Dec 2011 15:13:36 +0900
 
@@ -118,7 +819,6 @@ libprivilege-control (0.0.2-33) unstable; urgency=low
   *  - make /etc/passwd and /etc/group symbolic link
   *  - original files are located in /opt/etc/
   * Tag: libprivilege-control_0.0.2-33
-  * Git: 165.213.180.234:slp/pkgs/l/libprivilege-control
 
  -- Kidong Kim <kd0228.kim@samsung.com>  Mon, 05 Dec 2011 17:04:14 +0900
 
@@ -127,7 +827,6 @@ libprivilege-control (0.0.2-32) unstable; urgency=low
   * 11/12/02
   *  - change license : LGPL -> apache
   * Tag: libprivilege-control_0.0.2-32
-  * Git: 165.213.180.234:slp/pkgs/l/libprivilege-control
 
  -- Kidong Kim <kd0228.kim@samsung.com>  Fri, 02 Dec 2011 17:00:47 +0900
 
@@ -137,7 +836,6 @@ libprivilege-control (0.0.2-31) unstable; urgency=low
   *  - fix permission of developer home directory
   *  - fix problem not to launch application which has org. prefix in pacakage name
   * Tag: libprivilege-control_0.0.2-31
-  * Git: 165.213.180.234:slp/pkgs/l/libprivilege-control
 
  -- Kidong Kim <kd0228.kim@samsung.com>  Wed, 30 Nov 2011 17:23:12 +0900
 
@@ -145,7 +843,6 @@ libprivilege-control (0.0.2-30) unstable; urgency=low
 
   * fix boiler-plate
   * Tag: libprivilege-control_0.0.2-30
-  * Git: 165.213.180.234:slp/pkgs/l/libprivilege-control
 
  -- Kidong Kim <kd0228.kim@samsung.com>  Wed, 13 Jul 2011 10:17:20 +0900
 
@@ -153,7 +850,6 @@ libprivilege-control (0.0.2-29) unstable; urgency=low
 
   * change dialer package name - phone
   * Tag: libprivilege-control_0.0.2-29
-  * Git: 165.213.180.234:slp/pkgs/l/libprivilege-control
 
  -- Kidong Kim <kd0228.kim@samsung.com>  Thu, 23 Jun 2011 13:42:26 +0900
 
@@ -161,7 +857,6 @@ libprivilege-control (0.0.2-28) unstable; urgency=low
 
   * add new executable - kill_app
   * Tag: libprivilege-control_0.0.2-28
-  * Git: 165.213.180.234:slp/pkgs/l/libprivilege-control
 
  -- Kidong Kim <kd0228.kim@samsung.com>  Mon, 13 Jun 2011 15:35:59 +0900
 
@@ -169,7 +864,6 @@ libprivilege-control (0.0.2-27) unstable; urgency=low
 
   * fix package name bug
   * Tag: libprivilege-control_0.0.2-27
-  * Git: 165.213.180.234:slp/pkgs/l/libprivilege-control
 
  -- Kidong Kim <kd0228.kim@samsung.com>  Mon, 11 Apr 2011 14:45:41 +0900
 
@@ -177,7 +871,6 @@ libprivilege-control (0.0.2-26) unstable; urgency=low
 
   * fix inhouse package name (temporary)
   * Tag: libprivilege-control_0.0.2-26
-  * Git: 165.213.180.234:slp/pkgs/l/libprivilege-control
 
  -- Kidong Kim <kd0228.kim@samsung.com>  Mon, 11 Apr 2011 11:50:06 +0900
 
@@ -186,7 +879,6 @@ libprivilege-control (0.0.2-25) unstable; urgency=low
   * add new error code
   * if fail to execute setuid or setgid or setenv, do not execute new app
   * Tag: libprivilege-control_0.0.2-25
-  * Git: 165.213.180.234:slp/pkgs/l/libprivilege-control
 
  -- Kidong Kim <kd0228.kim@samsung.com>  Tue, 15 Mar 2011 15:08:41 +0900
 
@@ -194,7 +886,6 @@ libprivilege-control (0.0.2-24) unstable; urgency=low
 
   * fix dependency - add libssl-dev
   * Tag: libprivilege-control_0.0.2-24
-  * Git: 165.213.180.234:slp/pkgs/l/libprivilege-control
 
  -- Kidong Kim <kd0228.kim@samsung.com>  Mon, 14 Mar 2011 17:38:52 +0900
 
@@ -202,7 +893,6 @@ libprivilege-control (0.0.2-23) unstable; urgency=low
 
   * fix dependency problem - misuse tag
   * Tag: libprivilege-control_0.0.2-23
-  * Git: 165.213.180.234:slp/pkgs/l/libprivilege-control
 
  -- Kidong Kim <kd0228.kim@samsung.com>  Mon, 14 Mar 2011 09:14:04 +0900
 
@@ -211,7 +901,6 @@ libprivilege-control (0.0.2-22) unstable; urgency=low
   * change user name to hashing value to have equal length.
   * fix prevent bug
   * Tag: libprivilege-control_0.0.2-22
-  * Git: 165.213.180.234:slp/pkgs/l/libprivilege-control
 
  -- Kidong Kim <kd0228.kim@samsung.com>  Tue, 08 Mar 2011 15:55:06 +0900
 
@@ -219,7 +908,6 @@ libprivilege-control (0.0.2-21) unstable; urgency=low
 
   * modify not to check password when logging by developer
   * Tag: libprivilege-control_0.0.2-21
-  * Git: 165.213.180.234:slp/pkgs/l/libprivilege-control
 
  -- Kidong Kim <kd0228.kim@samsung.com>  Fri, 18 Feb 2011 16:01:31 +0900
 
@@ -227,7 +915,6 @@ libprivilege-control (0.0.2-20) unstable; urgency=low
 
   * add new executables for SDK
   * Tag: libprivilege-control_0.0.2-20
-  * Git: 165.213.180.234:slp/pkgs/l/libprivilege-control
 
  -- Kidong Kim <kd0228.kim@samsung.com>  Fri, 11 Feb 2011 09:56:35 +0900
 
@@ -235,7 +922,6 @@ libprivilege-control (0.0.2-19) unstable; urgency=low
 
   * fix 3rd party app launching problem
   * Tag: libprivilege-control_0.0.2-19
-  * Git: 165.213.180.234:slp/pkgs/l/libprivilege-control
 
  -- Kidong Kim <kd0228.kim@samsung.com>  Tue, 11 Jan 2011 16:51:17 +0900
 
@@ -243,7 +929,6 @@ libprivilege-control (0.0.2-18) unstable; urgency=low
 
   * fix strtoul problem
   * Tag: libprivilege-control_0.0.2-18
-  * Git: 165.213.180.234:slp/pkgs/l/libprivilege-control
 
  -- Kidong Kim <kd0228.kim@samsung.com>  Mon, 03 Jan 2011 16:56:15 +0900
 
@@ -251,7 +936,6 @@ libprivilege-control (0.0.2-17) unstable; urgency=low
 
   * fix postinst script
   * Tag: libprivilege-control_0.0.2-17
-  * Git: 165.213.180.234:slp/pkgs/l/libprivilege-control
 
  -- Kidong Kim <kd0228.kim@samsung.com>  Wed, 15 Dec 2010 10:00:57 +0900
 
@@ -259,7 +943,6 @@ libprivilege-control (0.0.2-16) unstable; urgency=low
 
   * preparations for limo contribution
   * Tag: libprivilege-control_0.0.2-16
-  * Git: 165.213.180.234:/git/slp/pkgs/libprivilege-control
 
  -- Kidong Kim <kd0228.kim@samsung.com>  Fri, 26 Nov 2010 15:55:20 +0900
 
@@ -267,7 +950,6 @@ libprivilege-control (0.0.2-15) unstable; urgency=low
 
   * fix package types
   * Tag: libprivilege-control_0.0.2-15
-  * Git: 165.213.180.234:/git/slp/pkgs/libprivilege-control
 
  -- Kidong Kim <kd0228.kim@samsung.com>  Wed, 24 Nov 2010 15:00:30 +0900
 
@@ -275,7 +957,6 @@ libprivilege-control (0.0.2-14) unstable; urgency=low
 
   * fix java package
   * Tag: libprivilege-control_0.0.2-14
-  * Git: 165.213.180.234:/git/slp/pkgs/libprivilege-control
 
  -- Kidong Kim <kd0228.kim@samsung.com>  Wed, 24 Nov 2010 12:03:37 +0900
 
@@ -283,7 +964,6 @@ libprivilege-control (0.0.2-13) unstable; urgency=low
 
   * modify package name
   * Tag: libprivilege-control_0.0.2-13
-  * Git: 165.213.180.234:/git/slp/pkgs/libprivilege-control
 
  -- Kidong Kim <kd0228.kim@samsung.com>  Mon, 22 Nov 2010 14:18:14 +0900
 
@@ -291,7 +971,6 @@ libprivilege-control (0.0.2-12) unstable; urgency=low
 
   * add environment variables
   * Tag: libprivilege-control_0.0.2-12
-  * Git: 165.213.180.234:/git/slp/pkgs/libprivilege-control
 
  -- Kidong Kim <kd0228.kim@samsung.com>  Wed, 27 Oct 2010 08:07:45 +0900
 
@@ -299,7 +978,6 @@ libprivilege-control (0.0.2-11) unstable; urgency=low
 
   * modify bug in case that current user is inhouse
   * Tag: libprivilege-control_0.0.2-11
-  * Git: 165.213.180.234:/git/slp/pkgs/libprivilege-control
 
  -- Kidong Kim <kd0228.kim@samsung.com>  Thu, 21 Oct 2010 12:03:57 +0900
 
@@ -307,7 +985,6 @@ libprivilege-control (0.0.2-10) unstable; urgency=low
 
   * add new function
   * Tag: libprivilege-control_0.0.2-10
-  * Git: 165.213.180.234:/git/slp/pkgs/libprivilege-control
 
  -- Kidong Kim <kd0228.kim@samsung.com>  Wed, 20 Oct 2010 19:31:24 +0900
 
@@ -315,7 +992,6 @@ libprivilege-control (0.0.2-9) unstable; urgency=low
 
   * modify doxygen group
   * Tag : libprivilege-control_0.0.2-9
-  * Git : 165.213.180.234:/git/slp/pkgs/libprivilege-control
 
  -- Kidong Kim <kd0228.kim@samsung.com>  Mon, 27 Sep 2010 17:56:04 +0900
 
@@ -323,7 +999,6 @@ libprivilege-control (0.0.2-8) unstable; urgency=low
 
   * git tag typing error
   * Tag : libprivilege-control_0.0.2-8
-  * Git : 165.213.180.234:/git/slp/pkgs/libprivilege-control
 
  -- Kidong Kim <kd0228.kim@samsung.com>  Wed, 01 Sep 2010 17:21:00 +0900
 
@@ -331,7 +1006,6 @@ libprivilege-control (0.0.2-7) unstable; urgency=low
 
   * Change copyright context
   * Tag : libprivilege-conteol_0.0.2-7
-  * Git : 165.213.180.234:/git/slp/pkgs/libprivilege-control
 
  -- Kidong Kim <kd0228.kim@samsung.com>  Wed, 01 Sep 2010 17:09:31 +0900
 
@@ -339,7 +1013,6 @@ libprivilege-control (0.0.2-6) unstable; urgency=low
 
   * Add home directory of inhouse account
   * Tag : libprivilege-control_0.0.2-6
-  * Git : 165.213.180.234:/git/slp/pkgs/libprivilege-control
 
  -- Kidong Kim <kd0228.kim@samsung.com>  Sat, 31 Jul 2010 13:53:37 +0900
 
@@ -347,7 +1020,6 @@ libprivilege-control (0.0.2-5) unstable; urgency=low
 
   * Add boiler-plate in header file
   * Tag : libprivilege-control_0.0.2-5
-  * Git : 165.213.180.234:/git/slp/pkgs/libprivilege-control
 
  -- Kidong Kim <kd0228.kim@samsung.com>  Sat, 24 Jul 2010 10:48:19 +0900
 
@@ -355,7 +1027,6 @@ libprivilege-control (0.0.2-4) unstable; urgency=low
 
   * fix tagging problem
   * Tag : libprivilege-control_0.0.2-4
-  * Git : 165.213.180.234:/git/slp2.0/slp2.0-pkgs/libprivilege-control-0
 
  -- Kidong Kim <kd0228.kim@samsung.com>  Wed, 09 Jun 2010 15:24:41 +0900
 
@@ -363,7 +1034,6 @@ libprivilege-control (0.0.2-3) unstable; urgency=low
 
   * modify source code to change GID
   * Tag : libprivilege-control_0.0.2-3
-  * Git : 165.213.180.234:/git/slp2.0.slp2.0-pkgs/libprivilege-control-0
 
  -- Kidong Kim <kd0228.kim@samsung.com>  Wed, 09 Jun 2010 11:49:40 +0900
 
@@ -371,7 +1041,6 @@ libprivilege-control (0.0.2-2) unstable; urgency=low
 
   * modify postinst to switch DAC flag
   * Tag : libprivilege-control_0.0.2-2
-  * Git : 165.213.180.234:/git/slp2.0/slp2.0-pkgs/libprivilege-control-0
 
  -- Kidong Kim <kd0228.kim@samsung.com>  Thu, 03 Jun 2010 17:49:39 +0900
 
@@ -379,7 +1048,6 @@ libprivilege-control (0.0.2-1) unstable; urgency=low
 
   * add flag to determine DAC
   * Tag : libprivilege-control_0.0.2-1
-  * Git : 165.213.180.234:/git/slp2.0/slp2.0-pkgs/libprivilege-control-0
 
  -- Kidong Kim <kd0228.kim@samsung.com>  Wed, 02 Jun 2010 13:49:56 +0900
 
@@ -387,6 +1055,5 @@ libprivilege-control (0.0.1-1) unstable; urgency=low
 
   * Initial Release.
   * Tag : libprivilege-control_0.0.1-1
-  * Git : 165.213.180.234:/git/slp2.0/slp2.0-pkgs/libprivilege-control-0
 
  -- Kidong Kim <kd0228.kim@samsung.com>  Thu, 13 May 2010 19:28:13 +0900

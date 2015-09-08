@@ -1,0 +1,11 @@
+[Unit]
+Description=SMACK rules loading
+ConditionSecurity=smack
+Before=starter.service
+
+[Service]
+Type=oneshot
+ExecStart = /bin/bash -c '/usr/bin/sqlite3 /opt/dbspace/.rules-db.db3 < /usr/share/privilege-control/db/load-rules-db.sql | /usr/bin/smack_rules_buffer > /smack/change-rule'
+
+[Install]
+WantedBy=multi-user.target

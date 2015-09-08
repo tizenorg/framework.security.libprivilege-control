@@ -1,0 +1,47 @@
+#!/bin/sh
+PATH=/sbin:/usr/sbin:/bin:/usr/bin
+DBSPACE=/opt/usr/dbspace
+APPS_DIR=/opt/usr/apps
+SHARE_DIR=/opt/usr/share
+
+# Enable Smack ptrace option
+/bin/echo "1" > /smack/ptrace
+
+/usr/bin/chsmack -a "system::share" /dev/shm/
+/usr/bin/chsmack -t /dev/shm/
+
+chown 5000:5000 /opt/home/app
+find /opt/home/app -print0 | xargs -0 chsmack -a 'system::homedir'
+find /opt/home/app -type d -print0 | xargs -0 chsmack -t
+
+if [ ! -e /opt/home/app/.e ]; then
+	mkdir -p /opt/home/app/.e
+fi
+find /opt/home/app/.e -print0 | xargs -0 chsmack -a 'e17::config'
+find /opt/home/app/.e -type d -print0 | xargs -0 chsmack -t
+
+find /opt/usr/media -print0 | xargs -0 chsmack -a 'system::media'
+find /opt/usr/media -type d -print0 | xargs -0 chsmack -t
+
+chsmack -a '*' /var/tmp
+
+# Default netlabel
+echo "0.0.0.0/1 system::use_internet" >> /smack/netlabel
+echo "128.0.0.0/1 system::use_internet" >> /smack/netlabel
+echo "10.0.2.2 system::debugging_network" >> /smack/netlabel
+echo "10.0.2.16 system::debugging_network" >> /smack/netlabel
+echo "127.0.0.1 -CIPSO" >> /smack/netlabel
+echo "192.168.129.3/32 system::debugging_network" >> /smack/netlabel
+echo "system::use_internet" > /smack/ambient
+
+if [ ! -e /opt/etc/.smack_pre_labeling ]; then
+
+        # fontcache
+        /bin/mkdir -p /opt/var/cache/fontconfig
+        /usr/bin/chsmack -t /opt/var/cache/fontconfig
+        /usr/bin/chsmack -a "system::homedir" /opt/var/cache/fontconfig/*
+        /usr/bin/chsmack -a "system::homedir" /opt/var/cache/fontconfig
+
+        /bin/touch /opt/etc/.smack_pre_labeling
+fi
+

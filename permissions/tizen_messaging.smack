@@ -1,5 +1,0 @@
-db-media	rw
-msg-server	w
-db-email-service	rw
-email-service	w
-db-msg_service	rw

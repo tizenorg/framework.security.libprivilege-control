@@ -1,0 +1,13 @@
+<manifest>
+    <request>
+        <domain name="_" />
+    </request>
+    <assign>
+        <filesystem path="/usr/bin/api_feature_loader" exec_label="none"/>
+        <filesystem path="/usr/bin/smack_rules_buffer" exec_label="none"/>
+        <filesystem path="/usr/bin/slp-su" exec_label="none"/>
+        <filesystem path="/etc/rc.d/init.d/smack_default_labeling" exec_label="none"/>
+        <filesystem path="/etc/init.d/smack_default_labeling" exec_label="none"/>
+        <filesystem path="/usr/share/privilege-control/db/updater.sh" exec_label="none"/>
+    </assign>
+</manifest>

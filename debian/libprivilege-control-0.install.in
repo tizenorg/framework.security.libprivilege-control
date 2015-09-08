@@ -4,4 +4,4 @@
 /usr/share/privilege-control/*
 /opt/etc/passwd
 /opt/etc/group
-/lib/udev/rules.d
+/usr/lib/udev/rules.d

@@ -1,0 +1,6 @@
+#!/bin/sh
+
+for opt in $@
+do
+	echo UNAME_"$(echo $opt | sed -e y/-/_/ -e 's/\(.*\)/\U\1/')"=\""$(/bin/uname --$opt)"\"
+done

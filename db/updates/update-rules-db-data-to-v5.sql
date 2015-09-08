@@ -1,0 +1,2 @@
+--PRAGMA journal_mode = PERSIST;
+--No data chanages. Schema only--
