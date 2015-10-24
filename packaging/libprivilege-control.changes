@@ -7,12 +7,16 @@
 - Fix get_current_container_id
 [Lukasz Kostyra]
 - Update get_current_container_id
+[Kidong Kim]
+- add home directory of system account
 [jooseong.lee]
 - Add netlabel(system::debugging_network) to 192.168.129.3
+[Kidong Kim]
+- add root-to-system method
 
 * Fri Apr 3 2015 Jooseong Lee - 0.0.92.SLP
 [jooseong.lee]
- - Remove wrong netlabeling
+- Remove wrong netlabeling
 
 * Fri Mar 6 2015 Krzysztof Jackiewicz - 0.0.91
 [Krzysztof Jackiewicz]

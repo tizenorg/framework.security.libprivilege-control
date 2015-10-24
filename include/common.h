@@ -22,11 +22,9 @@
 #ifndef COMMON_H_
 #define COMMON_H_
 
-#include <stdio.h>
 #include <dlog.h>
-#include <fts.h>
 #include <stdbool.h>
-#include <sys/smack.h>
+
 #include "privilege-control.h"
 
 #ifdef LOG_TAG
@@ -66,15 +64,9 @@
 void freep(void *p);
 void closep(int *fd);
 void fclosep(FILE **f);
-void fts_closep(FTS **f);
 #define AUTO_FREE       __attribute__ ((cleanup(freep)))       = NULL
 #define AUTO_CLOSE      __attribute__ ((cleanup(closep)))      = -1
 #define AUTO_FCLOSE     __attribute__ ((cleanup(fclosep)))     = NULL
-#define AUTO_FTS_CLOSE  __attribute__ ((cleanup(fts_closep)))   = NULL
-
-#define SMACK_RULES_DIR          "/etc/smack-app/accesses.d/"
-#define SMACK_STARTUP_RULES_FILE "/etc/smack-app-early/accesses.d/rules"
-#define SMACK_LOADED_APP_RULES   "/var/run/smack-app/"
 
 #define SMACK_APP_LABEL_TEMPLATE        "~APP~"
 #define SMACK_SHARED_DIR_LABEL_TEMPLATE "~APP_SHARED_DIR~"
@@ -82,45 +74,13 @@ void fts_closep(FTS **f);
 
 int smack_label_is_valid(const char* smack_label);
 
-int load_smack_from_file(const char* app_id, struct smack_accesses** smack, int *fd, char** path);
-int load_smack_from_file_early(const char* app_id, struct smack_accesses** smack, int *fd, char** path);
-int smack_mark_file_name(const char *app_id, char **path);
-bool file_exists(const char* path);
-int smack_file_name(const char* app_id, char** path);
 int have_smack(void);
-int base_name_from_perm(const char *perm, char **name);
 
-
-/**
- * Set EXEC label on executable file or symlink to executable file
- *
- * @param label label to be set
- * @param path  link to exec file or symbolic link to exec file
- * @return      PC_OPERATION_SUCCESS on success,
- *              error code otherwise
- */
-int set_exec_label(const char *label, const char *path);
 
 /**
  * Return string with current tizen version number.
  */
 const char *get_current_tizen_ver(void);
-
-/**
- * Get LXC container name that calling process is running in.
- *
- * @return  Null-terminated container's name string or NULL, if process is running in a host.
- *          There is no need to free memory.
- */
-const char* get_current_container_id(void);
-
-/**
- * Append prefix to a SMACK label. Currently, prefix consists of current LXC container name.
- *
- * @return Modified label: <container_name>::<str> The function does allocate memory, so a caller
- *         is responsible for releasing it.
- */
-const char* attach_label_prefix(const char *const str);
 
 /**
  * Get the permission family type name.
@@ -131,16 +91,6 @@ const char* attach_label_prefix(const char *const str);
  * @return          name of the application's type or NULL if no matching type was found
  */
 const char* app_type_name(app_type_t app_type);
-
-/**
- * Converts app type string to app_type_t
- *
- * @ingroup RDB internal functions
- *
- * @param  name     type name of the application
- * @return          application type
- */
-app_type_t str2app_type(const char* const name);
 
 /**
  * Get the permission type name
@@ -217,9 +167,5 @@ int parse_rule(const char *const s_rule,
  *                             error code otherwise
  */
 int validate_all_rules(const char *const *const pp_permissions_list);
-
-void load_from_file(const char *const s_name_pattern, const char *const tizen_ver, bool fast);
-void load_from_dir(const char  *const s_dir, const char *const tizen_ver, bool fast);
-void load_additional_rules(const char *const s_rules_file_path);
 
 #endif /* COMMON_H_ */

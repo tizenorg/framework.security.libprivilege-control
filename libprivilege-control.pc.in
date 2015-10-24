@@ -6,5 +6,6 @@ includedir=@INCLUDE_INSTALL_DIR@
 Name: libprivilege-control 
 Description: Library to control privilege of application
 Version: @VERSION@
+Requires: security-server
 Libs: -L${libdir} -lprivilege-control
 Cflags: -I${includedir}/
